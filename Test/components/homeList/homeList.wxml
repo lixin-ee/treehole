@@ -1,0 +1,4 @@
+<!--components/homeList/homeList.wxml-->
+<scroll-view scroll-y="true">
+此处放置homelist组件
+</scroll-view>

@@ -1,0 +1,7 @@
+<!--pages/home/home.wxml-->
+
+<van-col span="24">
+  <van-row span="1"><searchBar class="myItem" id="sear"></searchBar></van-row>
+  
+  <van-row span="23"> <navigationBar class="myItem" id="navi"></navigationBar></van-row>
+</van-col>

@@ -1,0 +1,7 @@
+<!--pages/mine/mine.wxml-->
+
+<view class="myMinePage">
+        <searchBar class="myItem" id="sear"></searchBar>
+        <myInfo class="myItem" id="myin"></myInfo>
+        <myWork class="myItem" id="mywo"></myWork>
+</view>

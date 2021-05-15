@@ -1,0 +1,4 @@
+<!--components/myInfo/myInfo.wxml-->
+<view>
+    此处放置myInfo组件
+</view>

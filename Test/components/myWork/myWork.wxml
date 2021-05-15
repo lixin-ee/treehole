@@ -1,0 +1,4 @@
+<!--components/myWork/myWork.wxml-->
+<scroll-view scroll-y="true">
+    此处放置myWork组件
+</scroll-view>

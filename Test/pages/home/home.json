@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "searchBar":"/components/searchBar/searchBar",
+    "navigationBar":"/components/navigationBar/navigationBar",
+    "homeList":"/components/homeList/homeList",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
+  }
+}

@@ -1,0 +1,13 @@
+<!--pages/details/details.wxml-->
+
+<scroll-view>
+    <view id="problem">
+    <workDetails class="problem"> 
+    </workDetails>
+    </view>
+    <view class="answers" wx:for="{{myAnswerList}}">
+        <workDetails content="{{item.content}}" author="{{item.author}}" workType="answer">
+
+        </workDetails>
+    </view>
+</scroll-view>

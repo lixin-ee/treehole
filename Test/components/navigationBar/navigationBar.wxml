@@ -1,0 +1,9 @@
+<!--components/navigationBar/navigationBar.wxml-->
+<van-tabs active="{{ active }}" animated>
+  <van-tab title="标签 1"><homeList></homeList></van-tab>
+  <van-tab title="标签 2"><homeList></homeList></van-tab>
+  <van-tab title="标签 3"><homeList></homeList></van-tab>
+  <van-tab title="标签 4"><homeList></homeList></van-tab>
+  <van-tab title="标签 5"><homeList></homeList></van-tab>
+  <van-tab title="标签 6"><homeList></homeList></van-tab>
+</van-tabs>

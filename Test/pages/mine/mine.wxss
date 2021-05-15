@@ -1,0 +1,24 @@
+/* pages/mine/mine.wxss */
+.myMinePage{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#sear
+{
+    border: 5rpx solid #0000ff;
+    flex-grow: 2;
+}
+
+#myin
+{
+    border: 5rpx solid #0000ff;
+    flex-grow: 60;
+}
+
+#mywo
+{
+    border: 5rpx solid #0000ff;
+    flex-grow: 120;
+}
