@@ -1,0 +1,12 @@
+<!--pages/details/details.wxml-->
+<!-- 详情界面 第一个展示类型为problem的workDetails 后续展示类型为answer的workDetails -->
+<scroll-view>
+    <view id="problem">
+        <workDetails workData="{{problem}}">
+        </workDetails>
+    </view>
+    <view class="answers" wx:for="{{myAnswerList}}" wx:key="id">
+        <workDetails workData="{{item}}">
+        </workDetails>
+    </view>
+</scroll-view>

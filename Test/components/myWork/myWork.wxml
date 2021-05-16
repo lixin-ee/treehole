@@ -1,0 +1,8 @@
+<!--components/myWork/myWork.wxml-->
+<!-- myWork放置于mine页面 -->
+<!-- 用于展示
+1.我的提问 允许折叠 允许上下滑动
+2.我的回答 允许折叠 允许上下滑动 -->
+<scroll-view scroll-y="true">
+    此处放置myWork组件
+</scroll-view>

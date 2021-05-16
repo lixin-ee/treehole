@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "summary":"/components/summary/summary"
+    }
+}

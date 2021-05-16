@@ -1,0 +1,16 @@
+<!--components/searchBar/searchBar.wxml-->
+<!-- 搜索栏 放置于home界面和mine界面 -->
+<!-- 用于获取其中的关键词 -->
+<!-- 在点击搜索后展示搜索结果，不要求实现实时匹配 -->
+<!-- 事件绑定在此文件下进行，事件函数请在js中完成 -->
+<view >
+       <van-search
+  value="{{ value }}"
+  placeholder="请输入搜索关键词"
+  use-action-slot
+  bind:change="onChange"
+  bind:search="onSearch"
+>
+  <view slot="action" bind:tap="onClick">搜索</view>
+</van-search>
+</view>

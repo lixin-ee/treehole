@@ -1,0 +1,13 @@
+<!--miniprogram/custom-tab-bar/index.wxml-->
+<!-- TO-DO 调试完成后更改list数组和导航栏 -->
+<!-- 此组件已经基本完成 -->
+
+<!-- 自定义TabBar 底部导航栏 -->
+<cover-view class="tab-bar">
+  <van-tabbar active="{{ selected }}" bind:change="switchTab">
+    <van-tabbar-item icon="home-o">{{list[0].text}}</van-tabbar-item>
+    <van-tabbar-item icon="add-o">{{list[1].text}}</van-tabbar-item>
+    <van-tabbar-item icon="friends-o">{{list[2].text}}</van-tabbar-item>
+    <van-tabbar-item icon="user-o">{{list[3].text}}</van-tabbar-item>
+  </van-tabbar>
+</cover-view>
