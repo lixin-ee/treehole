@@ -5,14 +5,26 @@ Page({
      * 页面的初始数据
      */
     data: {
+        problem:
+        {
+            id:1,
+            type:"answer",
+            author:"lisin",
+            cont:"That is",
+            title:"zheshitaitou"
+        },
         myAnswerList:[
             {
-                content:"这是回答1",
-                author:"这是作者1",
+                id:1,
+                type:"problem",
+                author:"lisin",
+                cont:"That is",
             },
             {
-                content:"这是回答2",
-                author:"这是作者2",
+                id:2,
+                type:"answer",
+                author:"lisin",
+                cont:"That is",
             }
         ],
     },
@@ -35,7 +47,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 2
+        })
+    }
     },
 
     /**

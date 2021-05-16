@@ -1,4 +1,9 @@
 <!--components/myInfo/myInfo.wxml-->
+<!-- myInfo放置于mine页面 -->
+<!-- 我的信息 -->
+<!-- 左侧为头像 -->
+<!-- 右侧为昵称、账号信息 可以通过微信API获得 -->
+
 <view>
     此处放置myInfo组件
 </view>

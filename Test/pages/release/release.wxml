@@ -1,5 +1,0 @@
-<!--pages/release/release.wxml-->
-<view>
-    上方放置编辑器界面
-    下方放置按钮“取消”，“发布”
-</view>

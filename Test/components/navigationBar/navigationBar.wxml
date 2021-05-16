@@ -1,9 +1,12 @@
 <!--components/navigationBar/navigationBar.wxml-->
-<van-tabs active="{{ active }}" animated>
-  <van-tab title="标签 1"><homeList></homeList></van-tab>
-  <van-tab title="标签 2"><homeList></homeList></van-tab>
-  <van-tab title="标签 3"><homeList></homeList></van-tab>
-  <van-tab title="标签 4"><homeList></homeList></van-tab>
-  <van-tab title="标签 5"><homeList></homeList></van-tab>
-  <van-tab title="标签 6"><homeList></homeList></van-tab>
+<!-- 顶部导航栏 放置于home页面 -->
+<!-- 每个navigationBar的页面下对应一个homeList组件，用于实现不同类型的问题的展示 -->
+<!-- 调试时数组可预先创建，使用时从服务器读取，因此请在js中实现相应函数 -->
+<!-- 可能需要涉及到父、子组件的参数传递 -->
+<!-- 请注意，此处所说的父、子指逻辑关系，而非继承关系 -->
+<van-tabs  animated bind:change="OnChange">
+  <van-tab title="{{item.title}}" wx:for="{{navData.navArray}}" wx:key="id">
+    <homeList id="{{item.id}}">
+    </homeList>
+  </van-tab>
 </van-tabs>

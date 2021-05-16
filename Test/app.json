@@ -2,9 +2,9 @@
   "pages":[
     "pages/home/home",
     "pages/mine/mine",
-    "pages/release/release",
     "pages/details/details",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/editor/editor"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -15,29 +15,22 @@
   "usingComponents": {
   },
     "tabBar": {
+      "custom": true,
      "color": "#0000ff",
      "selectedColor": "#11cd6e",
      "borderStyle": "black" ,
      "list": [{
-       "selectedIconPath": "/images/home.png",
-       "iconPath": "/images/home.png",
        "pagePath": "pages/home/home",
        "text": "问答"
      },{
-      "selectedIconPath": "/images/add.png",
-      "iconPath": "/images/add.png",
-      "pagePath": "pages/release/release",
+      "pagePath": "pages/editor/editor",
       "text": "发布"
     }, 
     {
-      "selectedIconPath": "/images/add.png",
-      "iconPath": "/images/add.png",
       "pagePath": "pages/details/details",
       "text": "详情"
     }, 
      {
-       "selectedIconPath": "/images/mine.png",
-       "iconPath": "/images/mine.png",
        "pagePath": "pages/mine/mine",
        "text": "我的"
      }

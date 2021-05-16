@@ -26,14 +26,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        function writeObj(obj) {
-            var description = "mine onshow";
-            for (var i in obj) {
-                var property = obj[i];
-                description += i + " = " + property + "\n";
-            }
-            alert(description);
-        }
+        if (typeof this.getTabBar === 'function' &&
+              this.getTabBar()) {
+              this.getTabBar().setData({
+                selected: 3
+              })
+          }
     },
 
     /**

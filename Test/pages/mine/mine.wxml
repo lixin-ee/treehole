@@ -1,5 +1,5 @@
 <!--pages/mine/mine.wxml-->
-
+<!-- 我的界面 -->
 <view class="myMinePage">
         <searchBar class="myItem" id="sear"></searchBar>
         <myInfo class="myItem" id="myin"></myInfo>

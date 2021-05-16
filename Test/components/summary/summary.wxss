@@ -1,1 +1,5 @@
 /* components/summary/summary.wxss */
+
+.tagss{
+    display: inline;
+}

@@ -1,13 +1,11 @@
 <!--components/workDetail/workDetails.wxml-->
+<!-- 放置于问题详情界面中 -->
+<!-- 在问题详情中,第一个workDetails为提问,后续的workDetails为回答 -->
+<!-- 当此类型为回答时，隐藏标题栏 -->
 <view>
-    这里是问题/回答详情试试
-    1123412432412345235235321
-    2523452345432534252345
-    332432423152352342
-    423452523453253523
-    542342543534543
-    652435234532454352345
-    7523543534254235432
-    85432543543252435324
-    954353452354325432543
+ <view hidden="{{workData.workType==='answer'}}">
+    {{workData.title}}
+</view>
+<editor id="editor" class="ql-container" read-only="{{true}}">
+  </editor>
 </view>
