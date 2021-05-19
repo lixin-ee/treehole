@@ -3,6 +3,10 @@
 <!-- 用于展示
 1.我的提问 允许折叠 允许上下滑动
 2.我的回答 允许折叠 允许上下滑动 -->
-<scroll-view scroll-y="true">
-    此处放置myWork组件
-</scroll-view>
+
+<van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item  wx:for="{{myworkData.myworkArray}}" title="{{item.title}}" wx:key="id">
+    <homeList id="{{item.id}}">
+    </homeList>
+    </van-collapse-item>
+</van-collapse>

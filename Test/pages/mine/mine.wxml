@@ -1,7 +1,16 @@
 <!--pages/mine/mine.wxml-->
 <!-- 我的界面 -->
-<view class="myMinePage">
-        <searchBar class="myItem" id="sear"></searchBar>
-        <myInfo class="myItem" id="myin"></myInfo>
-        <myWork class="myItem" id="mywo"></myWork>
+<view class="minePage">
+        <view id="sear">
+                <searchBar></searchBar>
+        </view>
+        <view id="myin">
+                <myInfo></myInfo>
+        </view>
+        <view id="mywo">
+                <myWork></myWork>
+        </view>
 </view>
+
+<!-- <van-skeleton avator="true" title avatar row="4"> -->
+<!-- </van-skeleton> -->

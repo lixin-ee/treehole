@@ -4,18 +4,16 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        workData:{
-            type:Object,
-            value:{
-                id:1,
-                workAuthor:"author",
-                workType:"problem",
-                workCont:"Who cares",
-                // 如果为题目，则读取workTitle；否则不读取
-                workTitle:"How to complete miniprogram",
+        workData: {
+            type: Object,
+            value: {
+                id: 1,
+                author: "author",
+                type: "problem",
+                content: "11111111111222222222222222233333333333333333444445555555555555666666666666666667777777777777777777788888888888888888888889999999999999999900000000000000000000",
+               title: "How to complete miniprogram"
             }
-            
-        },
+        }
     },
 
     /**
@@ -24,12 +22,14 @@ Component({
     data: {
 
     },
-
-    lifetimes:{
-        ready:function(){
-            this.selectComponent("#editor")
-            //TO-DO 获得选定的子组件标识
-        }
+    lifetimes: {
+        // ready: function () {
+        //     // this.selectComponent("#editor")
+        //     const that = this
+        //     wx.createSelectorQuery().select('#editor').context(function (res) {
+        //       that.editorCtx = res.context
+        //     }).exec()
+        // }
     },
 
     /**

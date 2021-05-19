@@ -3,7 +3,7 @@
 <!-- 顶端导航栏下展示summary组件用 -->
 <!-- wxml逻辑功能与html相同 区别为wxml多使用text和view 请注意使标签如<1></1>或自闭和<1/> -->
 <!-- 可以在标签中设置属性信息 -->
-具体可查阅
+<!-- 具体可查阅 -->
 <scroll-view scroll-y="true">
     <view class="summary" wx:for="{{summaryList}}" wx:key="id">
         <summary sumData="{{item}}">  

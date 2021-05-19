@@ -8,23 +8,23 @@ Page({
         problem:
         {
             id:1,
-            type:"answer",
+            type:"problem",
             author:"lisin",
-            cont:"That is",
+            content:"That is",
             title:"zheshitaitou"
         },
         myAnswerList:[
             {
                 id:1,
-                type:"problem",
+                type:"answer",
                 author:"lisin",
-                cont:"That is",
+                content:"That is",
             },
             {
                 id:2,
                 type:"answer",
                 author:"lisin",
-                cont:"That is",
+                content:"That is",
             }
         ],
     },
