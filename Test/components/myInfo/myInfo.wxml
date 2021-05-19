@@ -3,7 +3,10 @@
 <!-- 我的信息 -->
 <!-- 左侧为头像 -->
 <!-- 右侧为昵称、账号信息 可以通过微信API获得 -->
+<!-- <open-data type="userAvatarUrl"></open-data>
+<open-data type="userNickName" lang="zh_CN"></open-data> -->
 
-<view>
-    此处放置myInfo组件
+<view class="avatar">
+    <van-image round width="5rem" height="5rem" src="/images/rs.png" />
+    {{infoData.nickname}}
 </view>

@@ -1,2 +1,22 @@
 /* pages/home/home.wxss */
 
+
+page{
+    height:90vh;
+  }
+
+  
+.outer
+{
+    height:100%;
+}
+
+.searBar
+{
+    height:10%;
+}
+
+.naviBar
+{
+    height:90%;
+}

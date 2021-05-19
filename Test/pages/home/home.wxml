@@ -1,8 +1,11 @@
 <!--pages/home/home.wxml-->
 <!-- home界面 如需要界面布局 请参考此处实例及vant weapp中有关layout的部分 -->
+<view class="outer">
+  <view class="searBar">
+    <searchBar class="myItem" id="sear"></searchBar>
+  </view>
 
-<van-col span="24">
-  <van-row span="1"><searchBar class="myItem" id="sear"></searchBar></van-row>
-  
-  <van-row span="23"> <navigationBar class="myItem" id="navi"></navigationBar></van-row>
-</van-col>
+  <view class="naviBar">
+    <navigationBar class="myItem" id="navi"></navigationBar>
+  </view>
+</view>

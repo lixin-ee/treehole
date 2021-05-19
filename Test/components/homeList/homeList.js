@@ -35,6 +35,18 @@ Component({
                 author:"Lu",
                 sumCont:"Hi",
                 tags:["man","try"]
+            },
+            {
+                id:2,
+                author:"Lu",
+                sumCont:"Hi",
+                tags:["man","try"]
+            },
+            {
+                id:3,
+                author:"Lu",
+                sumCont:"Hi",
+                tags:["man","try"]
             }
         ]
     },
