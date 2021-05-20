@@ -1,0 +1,16 @@
+<!--components/summary/summary.wxml-->
+<!-- 概要，放置于home页面下navigationBar对应的HomeList中 -->
+<!-- 用于展示问题的简单描述 -->
+<!-- 即在home页面中蓝色框圈出的部分，每个部分为一个summary -->
+<!-- 一个homeList中将会填充多个summary -->
+<view>
+    <view>
+        {{sumData.author}}
+    </view>
+    <view>
+        {{sumData.sumCont}}
+    </view>
+    <view class="tagss" wx:for="{{sumData.tags}}" wx:key="this">
+        {{item}}
+    </view>
+</view>

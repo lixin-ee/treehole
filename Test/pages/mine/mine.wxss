@@ -1,0 +1,28 @@
+/* pages/mine/mine.wxss */
+
+page{
+    height:90vh;
+  }
+  
+
+.minePage {
+    height: 100%;
+    width:100%;
+}
+
+#sear {
+    height: 10%;
+    border:5rpx solid #0000ff;
+}
+
+#myin {
+    height: 30%;
+    width:100%;
+    border:5rpx solid #0000ff;
+
+}
+
+#mywo {
+    height: 60%;
+    border:5rpx solid #0000ff;
+}

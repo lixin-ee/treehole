@@ -1,0 +1,6 @@
+/* components/myInfo/myInfo.wxss */
+
+.avatar
+{
+    margin:10rpx,10rpx,10rpx,10rpx;
+}

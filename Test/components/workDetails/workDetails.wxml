@@ -1,0 +1,14 @@
+<!--components/workDetail/workDetails.wxml-->
+<!-- 放置于问题详情界面中 -->
+<!-- 在问题详情中,第一个workDetails为提问,后续的workDetails为回答 -->
+<!-- 当此类型为回答时，隐藏标题栏 -->
+<view>
+  <view hidden="{{workData.type==='answer'}}">
+    <van-field value="{{workData.title}}" label="问题" readonly />
+  </view>
+  <van-field value="{{workData.author}}" label="作者" readonly />
+  <!-- <editor id="editor" class="ql-container" placeholder="{{workData.workCont}}" read-only="{{true}}"> -->
+  <view class="section">
+    <textarea value="   {{workData.content}}" auto-height readonly />
+    </view>
+</view>
