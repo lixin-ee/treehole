@@ -1,4 +1,5 @@
 {
+  "disableScroll": true,
   "usingComponents": {
     "searchBar":"/components/searchBar/searchBar",
     "navigationBar":"/components/navigationBar/navigationBar",

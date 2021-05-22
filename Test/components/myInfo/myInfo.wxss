@@ -1,6 +1,29 @@
 /* components/myInfo/myInfo.wxss */
 
-.avatar
-{
-    margin:10rpx,10rpx,10rpx,10rpx;
+/* :host {
+    display: block;
+    height: 100%;
+} */
+
+.avatar {
+    float: left;
+    /* vertical-align:middle; */
+    width:30%;
+    /* display: inline-block; */
+    height: 100%;
+    border:2rpx solid #0000ff;
+    position: relative;
+}
+.nickname{
+    /* vertical-align:middle; */
+    float: left;
+    width:60%;
+    /* display: inline-block; */
+    height: 100%;
+    border:2rpx solid #0000ff;
+    position: relative;
+}
+.van-row{
+    display: block;
+    height: 100%;
 }

@@ -5,8 +5,18 @@
 <!-- 右侧为昵称、账号信息 可以通过微信API获得 -->
 <!-- <open-data type="userAvatarUrl"></open-data>
 <open-data type="userNickName" lang="zh_CN"></open-data> -->
-
-<view class="avatar">
-    <van-image round width="5rem" height="5rem" src="/images/rs.png" />
-    {{infoData.nickname}}
+<view style="width:90%;height:100%">
+  <view class="avatar">
+    <view class="^container">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+  </view>
+  <view class="nickname">
+    <view class="^container">
+      <view style="width:80%">
+        <open-data type="userNickName" lang="zh_CN"></open-data>
+      </view>
+      <view style="width:80%">这里放id</view>
+    </view>
+  </view>
 </view>

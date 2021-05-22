@@ -4,12 +4,14 @@
         <view id="sear">
                 <searchBar></searchBar>
         </view>
-        <view id="myin">
-                <myInfo></myInfo>
-        </view>
-        <view id="mywo">
-                <myWork></myWork>
-        </view>
+        <scroll-view class="minemain" scroll-y="true">
+                <view id="myin">
+                        <myInfo class="^container"></myInfo>
+                </view>
+                <view id="mywo">
+                        <myWork></myWork>
+                </view>
+        </scroll-view>
 </view>
 
 <!-- <van-skeleton avator="true" title avatar row="4"> -->

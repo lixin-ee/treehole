@@ -1,7 +1,18 @@
 /* components/homeList/homeList.wxss */
 /* wxss对应css文件 使用vant weapp后布局操作大多在wxml中实现 */
 /* .表示类选择器，#表示id选择器 */
-.summary{
+.summary {
     margin: 5rpx 0;
     border: 5rpx solid #0000ff;
+    width: 95%;
+    height: 65px;
+}
+.homeout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+:host {
+    display: block;
 }

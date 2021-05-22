@@ -1,1 +1,10 @@
 /* components/navigationBar/navigationBar.wxss */
+:host{
+  display: block;
+  height: 100%;
+}
+
+.homeScroll{
+  height: 70vh;
+  margin-top: 14rpx;
+}

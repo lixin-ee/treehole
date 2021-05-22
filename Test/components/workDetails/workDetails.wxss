@@ -1,1 +1,51 @@
 /* components/workDetail/workDetails.wxss */
+:host {
+  display: block;
+}
+
+.content {
+  width: 95%;
+}
+
+.tags {
+  width: 95%;
+}
+
+.time{
+  display: inline-block;
+  font-size: 25rpx;
+  vertical-align: 13rpx;
+  color: gray;
+  margin-left: 30rpx;
+}
+.chip {
+  background-color: hotpink;
+  display: inline-block;
+  border-radius: 30rpx;
+  font-size: 20rpx;
+  height: 30rpx;
+  padding: 3rpx 10rpx;
+  color: bisque;
+  margin-left: 20rpx;
+  vertical-align: 13rpx;
+}
+
+.authorInfo {
+  height: 50rpx;
+  width: 95%;
+}
+
+.title {
+  text-overflow: ellipsis;
+  font-size: 35rpx;
+  font-weight: bold;
+  width: 95%;
+}
+
+.name {
+  display: inline-block;
+  font-size: 25rpx;
+  vertical-align: 15rpx;
+  color: gray;
+  margin-left: 5rpx;
+}
