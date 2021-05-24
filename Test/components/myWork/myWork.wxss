@@ -1,1 +1,7 @@
 /* components/myWork/myWork.wxss */
+:host{
+  display: block;
+}
+.workScroll{
+  height: 30vh;
+}

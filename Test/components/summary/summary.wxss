@@ -3,3 +3,6 @@
 .tagss{
     display: inline;
 }
+:host{
+    display: block;
+}

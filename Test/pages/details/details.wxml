@@ -1,5 +1,6 @@
 <!--pages/details/details.wxml-->
 <!-- 详情界面 第一个展示类型为problem的workDetails 后续展示类型为answer的workDetails -->
+<!-- 这个页面显示不出底部是正常的，之后用到该界面时无需底部 -->
 <scroll-view>
     <view id="problem">
         <workDetails workData="{{problem}}">

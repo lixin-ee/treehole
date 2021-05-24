@@ -11,6 +11,8 @@
 //     }
 // }
 Component({
+
+    externalClasses: ['scrollclass'],
     /**
      * 组件的属性列表
      */
@@ -23,30 +25,59 @@ Component({
      */
     data: {
         //TO-DO 从服务器获得summary列表并展示 此处仅供参考
-        summaryList:[
-            {
-                id:0,
-                author:"Li",
-                sumCont:"Hello",
-                tags:["mind","tree"]
+        summaryList: [{
+                id: 0,
+                author: "Li",
+                sumCont: "Hello",
+                tags: ["mind", "tree"]
             },
             {
-                id:1,
-                author:"Lu",
-                sumCont:"Hi",
-                tags:["man","try"]
+                id: 1,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
             },
             {
-                id:2,
-                author:"Lu",
-                sumCont:"Hi",
-                tags:["man","try"]
+                id: 2,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
             },
             {
-                id:3,
-                author:"Lu",
-                sumCont:"Hi",
-                tags:["man","try"]
+                id: 3,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
+            }, 
+            {
+                id: 4,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
+            },
+            {
+                id: 5,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
+            },
+            {
+                id: 6,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
+            },
+            {
+                id: 7,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
+            },
+            {
+                id: 8,
+                author: "Lu",
+                sumCont: "Hi",
+                tags: ["man", "try"]
             }
         ]
     },

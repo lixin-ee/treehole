@@ -3,7 +3,6 @@
 page{
     height:90vh;
   }
-  
 
 .minePage {
     height: 100%;
@@ -12,17 +11,19 @@ page{
 
 #sear {
     height: 10%;
-    border:5rpx solid #0000ff;
 }
 
 #myin {
-    height: 30%;
+    height: 33%;
     width:100%;
     border:5rpx solid #0000ff;
 
 }
 
 #mywo {
-    height: 60%;
-    border:5rpx solid #0000ff;
+    height: 67%;
+}
+
+.minemain{
+    height: 81vh;
 }
