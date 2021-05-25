@@ -22,13 +22,15 @@ Component({
                 }],
                 avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
             }
-        }
+        },
+
     },
 
     /**
      * 组件的初始数据
      */
     data: {
+
 
     },
     lifetimes: {
@@ -45,6 +47,18 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        onEditorReady() {
+            const that = this
+            this.createSelectorQuery().select('#editor1').context(function (res) {
+                // console.log(res)
+                that.editorCtx = res.context
+                that.editorCtx.setContents({
+                    html:that.data.workData.content,
+                    success:function(){
+                    }
+                })
 
-    }
+            }).exec()
+        },
+    },
 })

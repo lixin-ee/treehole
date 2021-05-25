@@ -1,0 +1,5 @@
+/* pages/search/search.wxss */
+.homeScroll{
+    height: 99vh;
+    margin-top: 14rpx;
+  }

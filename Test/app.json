@@ -4,7 +4,8 @@
     "pages/mine/mine",
     "pages/details/details",
     "pages/logs/logs",
-    "pages/editor/editor"
+    "pages/editor/editor",
+    "pages/search/search"
   ],
   "window":{
     "backgroundTextStyle":"light",

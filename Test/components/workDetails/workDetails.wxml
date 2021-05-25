@@ -12,7 +12,9 @@
   <view hidden="{{workData.type==='answer'}}" class="tags">
     <view wx:for="{{workData.tags}}" class="chip">{{item.name}}</view>
   </view>
-  <view class="content">
-    {{workData.content}}
-  </view>
+
+
+  <editor class="ql-container" id="editor1" bindready="onEditorReady" read-only="true">
+
+  </editor>
 </view>

@@ -3,11 +3,11 @@
 #problem
 {
     margin: 5rpx 0;
-    border: 5rpx solid #ee0000;
+    /* border: 5rpx solid #ee0000; */
 }
 
 .answers
 {
     margin: 5rpx 0;
-    border: 5rpx solid #0000ff;
+    /* border: 5rpx solid #0000ff; */
 }

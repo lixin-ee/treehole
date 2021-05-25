@@ -1,0 +1,3 @@
+<!--pages/search/search.wxml-->
+<homeList scrollclass="homeScroll" class="homelist">
+    </homeList>

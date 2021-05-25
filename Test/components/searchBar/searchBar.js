@@ -13,22 +13,23 @@ Component({
     data: {
               value: '',
             },
-            onChange(e) {
-              this.setData({
-                value: e.detail,
-              });
-            },
-            onSearch() {
-              Toast('搜索' + this.data.value);
-            },
-            onClick() {
-              Toast('搜索' + this.data.value);
-            },
+            
 
     /**
      * 组件的方法列表
      */
     methods: {
-        
+      onChange(e) {
+        this.setData({
+          value: e.detail,
+        });
+      },
+      onClick() {
+        // Toast('搜索' + this.data.value);
+        console.log(this.data.value)
+        wx.navigateTo({
+          url: '/pages/search/search?key='+this.data.value,
+        })
+      },
     }
 })
