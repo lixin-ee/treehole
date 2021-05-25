@@ -18,6 +18,13 @@
   color: gray;
   margin-left: 30rpx;
 }
+.name {
+  display: inline-block;
+  font-size: 25rpx;
+  vertical-align: 15rpx;
+  color: gray;
+  margin-left: 5rpx;
+}
 .chip {
   background-color: hotpink;
   display: inline-block;
@@ -42,10 +49,3 @@
   width: 95%;
 }
 
-.name {
-  display: inline-block;
-  font-size: 25rpx;
-  vertical-align: 15rpx;
-  color: gray;
-  margin-left: 5rpx;
-}

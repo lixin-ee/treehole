@@ -8,3 +8,6 @@
   height: 70vh;
   margin-top: 14rpx;
 }
+.tab{
+  background-color: rgb(245, 245, 245);
+}

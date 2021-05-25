@@ -3,10 +3,12 @@
 /* .表示类选择器，#表示id选择器 */
 .summary {
     margin: 5rpx 0;
-    border: 5rpx solid #0000ff;
+    /* border: 5rpx solid grey; */
     width: 95%;
-    height: 65px;
+   
+    display: block;
 }
+
 .homeout{
     display: flex;
     justify-content: center;

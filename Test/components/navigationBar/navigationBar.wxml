@@ -5,8 +5,8 @@
 <!-- 可能需要涉及到父、子组件的参数传递 -->
 <!-- 请注意，此处所说的父、子指逻辑关系，而非继承关系 -->
 <van-tabs  swipeable animated bind:change="OnChange">
-  <van-tab  class="hometab{{item.id}}"title="{{item.title}}" wx:for="{{navData.navArray}}" wx:key="id">
-    <homeList scrollclass="homeScroll" class="homelist">
+  <van-tab  class="hometab{{item.id}} tab" title="{{item.title}}" wx:for="{{navData.navArray}}" wx:key="id">
+    <homeList tagId="{{item.id}}" scrollclass="homeScroll" class="homelist">
     </homeList>
   </van-tab>
 </van-tabs>
