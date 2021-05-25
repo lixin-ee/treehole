@@ -5,7 +5,7 @@
 <!-- 可以在标签中设置属性信息 -->
 <!-- 具体可查阅 -->
 
-<scroll-view class="scrollclass" scroll-y="true" bindscrolltolower="onBottom" refresher-enabled="true" refresher-background="black">
+<scroll-view scroll-top="{{scrollTop}}" class="scrollclass" scroll-y="true" bindrefresherrefresh="onRefresh"  bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}" refresher-threshold="100">
     <view class="homeout">
         <summary class="summary" wx:for="{{summaryList}}" wx:key="id" sumData="{{item}}">
         </summary>

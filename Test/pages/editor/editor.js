@@ -272,10 +272,18 @@ Page({
       }
     })
   },
+
   onClose() {
     this.setData({
       show: false
     });
+  },
+
+  showDialog(e)
+  {
+this.setData({
+  show:true,
+})
   },
 
   onChange(event) {
