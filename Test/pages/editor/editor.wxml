@@ -13,7 +13,7 @@
     show="{{ show }}" bind:close="onClose">
     <view class="container">
       <view>
-      <!-- 标签选择 复选框 -->
+        <!-- 标签选择 复选框 -->
         <scroll-view scroll-y="true" style="height:600rpx">
           <van-checkbox-group class="tabChoose" value="{{ result }}" bind:change="onChange" max="{{ 10 }}"
             wx:for="{{tabData}}" wx:key="id">

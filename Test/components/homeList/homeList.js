@@ -100,72 +100,82 @@ Component({
         tagId:{
             type:Number,
             value:1,
+
         },
 
         summaryList: {
             type: Object,
             value: [{
                     id: 0,
-                    title:"标题一",
+                    title: "标题一",
                     author: "作者",
                     sumCont: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
-                    tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
+                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 1,
-                    title:"title",
+                    title: "title",
                     author: "author",
                     sumCont: "Hi, boy! Nice to meet you! How are you, Jack?",
-                    tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
+                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 2,
-                    title:"biaoti2",
+                    title: "biaoti2",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
+                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 3,
-                    title:"biaoti3",
+                    title: "biaoti3",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
+                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 4,
-                    title:"biaoti4",
+                    title: "biaoti4",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"]
+                    tags: ["man", "try"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 5,
-                    title:"biaoti5",
+                    title: "biaoti5",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"]
+                    tags: ["man", "try"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 6,
-                    title:"biaoti6",
+                    title: "biaoti6",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"]
+                    tags: ["man", "try"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 7,
-                    title:"biaoti7",
+                    title: "biaoti7",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"]
+                    tags: ["man", "try"], 
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
                     id: 8,
-                    title:"biaoti8",
+                    title: "biaoti8",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"]
+                    tags: ["man", "try"],
+                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 }
             ]
         }
@@ -177,7 +187,11 @@ Component({
     data: {
         //TO-DO 从服务器获得summary列表并展示 此处仅供参考
 
+        state: false,
+
     },
+
+    // },
     refresh:function(){
         wx.showToast({
           title: '刷新中',
@@ -199,8 +213,21 @@ Component({
         onBottom(e)
         {
             console.log(e,this.data.tagId);
-        }
+        },
 
+        onRefresh(e) {
+            console.log(e);
+           
+            
+            this.setData({
+                state: false
+            });
+            wx.showLoading({
+                title: '刷新中',
+              })
+              setTimeout(function () {
+                wx.hideLoading()
+              }, 1000);
+        },
     }
-    
 })

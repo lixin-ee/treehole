@@ -3,17 +3,8 @@
 <!-- 用于展示问题的简单描述 -->
 <!-- 即在home页面中蓝色框圈出的部分，每个部分为一个summary -->
 <!-- 一个homeList中将会填充多个summary -->
-<!-- <view>
-    <view>
-        {{sumData.author}}
-    </view>
-    <view>
-        {{sumData.sumCont}}
-    </view>
-    <view class="tagss" wx:for="{{sumData.tags}}" wx:key="this">
-        {{item}}
-    </view>
-</view> -->
+
+
 <view class="Block">
     <view class="Title">
         {{sumData.title}}
@@ -23,6 +14,8 @@
     </view>
 
     <view class="Authorandtag">
+        <van-image class="image" style="display:inline-block;" round width="35rpx" height="35rpx"
+            src="{{sumData.avatar}}" />
         <view class="Author">
             {{sumData.author}}
         </view>

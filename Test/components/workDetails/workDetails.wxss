@@ -3,8 +3,21 @@
   display: block;
 }
 
+.Block {
+  background: white;
+  box-shadow: 0rpx 0rpx 1rpx 1rpx #c9c9c9;
+}
+
+
 .content {
   width: 95%;
+  margin-bottom: 20rpx;
+}
+
+.ql-container
+{
+  height:auto;
+  min-height:auto
 }
 
 .tags {
