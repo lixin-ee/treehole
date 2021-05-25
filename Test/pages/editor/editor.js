@@ -17,7 +17,15 @@ Page({
   },
 
   onClickLeft() {
-
+    /*
+    wx.navigateBack({
+      delta: 2,
+    })
+    */
+    console.log( getCurrentPages())
+    wx.navigateTo({
+      url: 'pages/home/home',
+    })
   },
 
   onClickRight(e) {
@@ -114,7 +122,7 @@ Page({
         placeholder: "请输入您的回答"
       })
     }
-    console.log(option.query)
+    //console.log(option.query)
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({
