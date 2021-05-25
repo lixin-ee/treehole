@@ -1,29 +1,125 @@
 Page({
   data: {
     formats: {},
+    titleReadOnly: true,
+    problemTitle: "",
     readOnly: false,
     placeholder: '请输入问题详情',
-    editorHeight: 300,
+    editorHeight: 30,
     keyboardHeight: 0,
-    isIOS: false
+    isIOS: false,
+    textInput: ""
+
   },
+
+  properies: {
+
+  },
+
+  onClickLeft() {
+
+  },
+
+  onClickRight(e) {
+    console.log(this.data.titleReadOnly)
+    //var temp
+    //this.editorCtx.
+    if (!this.data.titleReadOnly) { // newProblem
+      if (this.data.problemTitle == "") {
+        wx.showToast({
+          title: '标题不能为空！',
+          icon: 'none',
+          duration: 1500
+        })
+        return
+      }
+      if (this.data.textInput == "") {
+        wx.showToast({
+          title: '问题描述不能为空！',
+          icon: 'none',
+          duration: 1500
+        })
+        return
+      }
+      console.log("problemTitle: ",this.data.problemTitle)
+      console.log("problemDescription: ",this.data.textInput)
+    } else {
+      if (this.data.textInput == "") {
+        wx.showToast({
+          title: '回答不能为空！',
+          icon: 'none',
+          duration: 1500
+        })
+        return
+      }
+      console.log("answer: ",this.data.textInput)
+    }
+
+
+  },
+
+  inputTitle(e) {
+    this.setData({
+      problemTitle: e.detail
+    })
+    console.log(this.data.problemTitle)
+  },
+
+  inputEditor(e) {
+    //console.log(e.detail.text)
+    this.setData({
+      textInput: e.detail.text
+    })
+
+  },
+
   readOnlyChange() {
     this.setData({
       readOnly: !this.data.readOnly
     })
   },
-  onShow(){
-    if (typeof this.getTabBar === 'function' &&
-              this.getTabBar()) {
-              this.getTabBar().setData({
-                selected: 1
-              })
-          }
+
+  setReadOnly() {
+    this.setData({
+      readOnly: true,
+    })
   },
-  onLoad() {
+
+  setNotReadOnly() {
+    this.setData({
+      readOnly: false,
+    })
+  },
+
+  onShow() {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
+    }
+  },
+  onLoad(option) {
+    var temptype = "newProblem";
+    //temptype = "newAnswer"
+    console.log(temptype)
+    if (temptype == "newProblem") {
+      this.setData({
+        titleReadOnly: false
+      })
+    } else {
+      this.setData({
+        titleReadOnly: true,
+        problemTitle: "从上一页获取的标题",
+        placeholder: "请输入您的回答"
+      })
+    }
+    console.log(option.query)
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
-    this.setData({ isIOS})
+    this.setData({
+      isIOS
+    })
     const that = this
     this.updatePosition(0)
     let keyboardHeight = 0
@@ -45,13 +141,22 @@ Page({
   },
   updatePosition(keyboardHeight) {
     const toolbarHeight = 50
-    const { windowHeight, platform } = wx.getSystemInfoSync()
+    const {
+      windowHeight,
+      platform
+    } = wx.getSystemInfoSync()
     let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
-    this.setData({ editorHeight, keyboardHeight })
+    this.setData({
+      editorHeight,
+      keyboardHeight
+    })
   },
   calNavigationBarAndStatusBar() {
     const systemInfo = wx.getSystemInfoSync()
-    const { statusBarHeight, platform } = systemInfo
+    const {
+      statusBarHeight,
+      platform
+    } = systemInfo
     const isIOS = platform === 'ios'
     const navigationBarHeight = isIOS ? 44 : 48
     return statusBarHeight + navigationBarHeight
@@ -66,7 +171,10 @@ Page({
     this.editorCtx.blur()
   },
   format(e) {
-    let { name, value } = e.target.dataset
+    let {
+      name,
+      value
+    } = e.target.dataset
     if (!name) return
     // console.log('format', name, value)
     this.editorCtx.format(name, value)
@@ -74,7 +182,9 @@ Page({
   },
   onStatusChange(e) {
     const formats = e.detail
-    this.setData({ formats })
+    this.setData({
+      formats
+    })
   },
   insertDivider() {
     this.editorCtx.insertDivider({

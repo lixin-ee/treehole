@@ -1,11 +1,12 @@
 <!-- 编辑器界面 仅供了解 -->
 <view id="mainCon">
   <van-nav-bar custom-style="padding-top: 0px;" safe-area-inset-top="{{false}}" left-text="返回" right-text="发布"
-    left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
-  <van-field value="{{ problemTitle }}" label="问题标题" placeholder="请输入问题标题" required="{{true}}" />
+    left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight"  />
+  <van-field value="{{ problemTitle }}" label="问题标题" placeholder="请输入问题标题" required="{{true}}"
+    readonly="{{titleReadOnly}}" clearable="{{true}}" bind:input="inputTitle" />
 
   <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange"
-    bindready="onEditorReady" style="bottom:{{keyboardHeight}}px">
+    bindready="onEditorReady" style="bottom:{{keyboardHeight}}px" bindinput="inputEditor" read-only="{{readOnly}}">
   </editor>
 
   <view class="toolbar" catchtouchend="format" hidden="{{false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px">
