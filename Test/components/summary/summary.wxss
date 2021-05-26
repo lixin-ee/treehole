@@ -1,7 +1,4 @@
 /* components/summary/summary.wxss */
-:host {
-    display: block;
-}
 
 :host {
     display: block;
@@ -36,13 +33,19 @@
 }
 
 .Author {
+    white-space:nowrap;
     font-size: 25rpx;
     color: black;
     margin-left: 10rpx;
     width: 15%;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden
+
 }
 
 .tagss {
+    white-space:nowrap;
     width: 80%;
     height: 30rpx;
     margin-left: 20rpx;
