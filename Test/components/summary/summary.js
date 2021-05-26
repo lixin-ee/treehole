@@ -68,7 +68,12 @@ Component({
      * 组件的方法列表
      */
     methods: {
-
+        clickSummary()
+        {
+            wx.navigateTo({
+                url: '/pages/details/details?' + this.data.problemId,
+              })
+        }
     }
 })
 
