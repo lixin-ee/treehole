@@ -8,8 +8,10 @@
 <scroll-view scroll-top="{{scrollTop}}" class="scrollclass" scroll-y="true" bindrefresherrefresh="onRefresh"
     bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}"
     refresher-threshold="100">
-    <view class="homeout">
-        <summary class="summary" wx:for="{{summaryList}}" wx:key="id" sumData="{{item}}">
-        </summary>
-    </view>
+
+        <view class="homeout" wx:for="{{dataArray}}" wx:key="id" wx:for-item="item1">
+            <summary class="summary" wx:for="{{item1}}" wx:key="id" sumData="{{item}}">
+            </summary>
+        </view>
+
 </scroll-view>

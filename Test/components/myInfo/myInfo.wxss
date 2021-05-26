@@ -11,7 +11,7 @@
     width:30%;
     /* display: inline-block; */
     height: 100%;
-    /* border:2rpx solid #0000ff; */
+    border:2rpx solid grey;
     position: relative;
 }
 .nickname{
