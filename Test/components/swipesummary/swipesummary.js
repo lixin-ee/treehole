@@ -4,24 +4,50 @@ Component({
    * 组件的属性列表
    */
   properties: {
-      sumData: {
-          type: Object,
-          value: [{
-                  title: "biaoti0",
-                  id: 0,
-                  sumCont: "There's no content",
-                  tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                  time: "2021-5-22 10:12",
-              },
-              {
-                  title:"biaoti1",
-                  id:1,
-                  sumCont: "There's no content",
-                  tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                  time: "2021-5-22 10:12",
-              }
-          ]
-      }
+    sumData: {
+      type: Object,
+      value: {
+        id: 0,
+        title: "biaoti0",
+        problemId: 123,
+        time: "2021-5-22 10:12",
+        content: "There's no content 234254363463453253",
+        tags: [{
+            tagName: "tag1",
+            tagId: "1",
+          },
+          {
+            tagName: "tag3",
+            tagId: "3",
+          },
+          {
+            tagName: "tag9",
+            tagId: "9",
+          },
+          {
+            tagName: "tag6666",
+            tagId: "6666",
+          },
+          {
+            tagName: "tag123",
+            tagId: "123",
+          },
+          {
+            tagName: "tag123",
+            tagId: "123",
+          },
+          {
+            tagName: "tag123",
+            tagId: "123",
+          },
+          {
+            tagName: "tag123",
+            tagId: "123",
+          },
+        ],
+        avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+      },
+    }
   },
 
   /**
@@ -35,7 +61,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    clickSwipesummary() {
+      console.log(this.data.sumData)
+      // var str = JSON.stringify(this.data.problemId)
+      wx.navigateTo({
+        url: '/pages/details/details?' + this.data.problemId,
+      })
+    }
   }
 })
-

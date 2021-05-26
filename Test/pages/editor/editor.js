@@ -59,7 +59,7 @@ Page({
   },
 
   onClickLeft() {
-
+    wx.navigateBack();
   },
 
   onClickRight(e) {
@@ -143,7 +143,7 @@ Page({
   },
 
   onLoad(option) {
-    var temptype = "newProblem";
+    var temptype = (option.type==="problem"?"newProblem":"newAnswer");
     //temptype = "newAnswer"
     console.log(temptype)
     if (temptype == "newProblem") {
@@ -157,7 +157,7 @@ Page({
         placeholder: "请输入您的回答"
       })
     }
-    console.log(option.query)
+    // console.log(option.query)
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({
@@ -279,11 +279,10 @@ Page({
     });
   },
 
-  showDialog(e)
-  {
-this.setData({
-  show:true,
-})
+  showDialog(e) {
+    this.setData({
+      show: true,
+    })
   },
 
   onChange(event) {

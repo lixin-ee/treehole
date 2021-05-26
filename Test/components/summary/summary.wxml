@@ -5,12 +5,12 @@
 <!-- 一个homeList中将会填充多个summary -->
 
 
-<view class="Block">
+<view class="Block" bindtap="clickSummary">
     <view class="Title">
         {{sumData.title}}
     </view>
     <view class="SumCont">
-        {{sumData.sumCont}}
+        {{sumData.content}}
     </view>
 
     <view class="Authorandtag">
@@ -20,7 +20,7 @@
             {{sumData.author}}
         </view>
         <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
-            <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item}}</view>
+            <view wx:for="{{sumData.tags}}" class="chip">{{item.tagName}}</view>
         </scroll-view>
     </view>
 </view>

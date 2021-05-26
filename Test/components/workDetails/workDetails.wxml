@@ -3,14 +3,16 @@
 <!-- 在问题详情中,第一个workDetails为提问,后续的workDetails为回答 -->
 <!-- 当此类型为回答时，隐藏标题栏 -->
 <view class="^container Block">
-  <view class="title" hidden="{{workData.type==='answer'}}">{{workData.title}}</view>
+  <view class="title" hidden="{{workData.type==='answer'}}">
+    <van-button type="info" icon="add-o" hairline plain block size="small" bindtap="clickAddAnswer">新增回答</van-button>
+    <view>{{workData.title}}</view></view>
   <view class="authorInfo">
     <van-image style="display:inline-block;" round width="49rpx" height="49rpx" src="{{workData.avatar}}" />
     <view class="name">{{workData.author}}</view>
     <view class="time">{{workData.time}}</view>
   </view>
   <view hidden="{{workData.type==='answer'}}" class="tags">
-    <view wx:for="{{workData.tags}}" class="chip">{{item.name}}</view>
+    <view wx:for="{{workData.tags}}" wx:key="this" class="chip">{{item.name}}</view>
   </view>
 
 

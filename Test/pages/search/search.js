@@ -14,7 +14,7 @@ Page({
      */
     onLoad: function (options) {
         this.searchKey=options.key
-        console.log(this.searchKey)
+        console.log(this.searchKey+" in search")
     },
 
     /**

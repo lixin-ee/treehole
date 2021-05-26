@@ -4,15 +4,16 @@
 <!-- 即在home页面中蓝色框圈出的部分，每个部分为一个summary -->
 <!-- 一个homeList中将会填充多个summary -->
 
+<view >
 <van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}">
 
-    <van-cell-group class="Block">
+    <van-cell-group  bindtap="clickSwipesummary" class="Block">
 
         <view class="Title">
             {{sumData.title}}
         </view>
         <view class="SumCont">
-            {{sumData.sumCont}}
+            {{sumData.content}}
         </view>
 
         <view class="Timeandtag">
@@ -20,7 +21,7 @@
                 {{sumData.time}}
             </view>
             <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
-                <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item}}</view>
+                <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item.tagName}}</view>
             </scroll-view>
         </view>
 
@@ -37,3 +38,4 @@
     </view>
 
 </van-swipe-cell>
+</view>

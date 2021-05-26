@@ -4,10 +4,12 @@
         <view id="sear">
                 <searchBar></searchBar>
         </view>
+       
         <scroll-view class="minemain" scroll-y="true">
                 <view id="myin">
                         <myInfo class="^container"></myInfo>
                 </view>
+                <van-button type="info" icon="add-o" hairline plain block size="small" bindtap="clickAddProblem">新增问题</van-button>
                 <view id="mywo">
                         <myWork></myWork>
                 </view>

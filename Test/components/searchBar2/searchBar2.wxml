@@ -1,0 +1,13 @@
+<!--components/searchBar2/searchBar2.wxml-->
+<view >
+       <van-search
+  value="{{ value }}"
+  maxlength="12"
+  placeholder="请输入搜索关键词"
+  use-action-slot
+  bind:change="onChange"
+  show-action
+>
+  <view slot="action" bind:tap="onClick">搜索</view>
+</van-search>
+</view>
