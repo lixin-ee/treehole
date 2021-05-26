@@ -4,92 +4,7 @@
 // Component表示此为一个组件 而非页面(Page)
 // 组件的其他属性、函数请查阅微信开发者文档，如生命周期函数lifetimes，pageLifetimes
 // JSON是配置文件
-// {
-//     "component": true,                               表示此为一个组件
-//     "usingComponents": {                             在其中列出此组件/页面所需要的其他组件和路径
-//         "summary":"/components/summary/summary"      <组件名>:<路径名>
-//     }
-// }
-// Component({
-
-//     externalClasses: ['scrollclass'],
-//     /**
-//      * 组件的属性列表
-//      */
-//     properties: {
-
-//     },
-
-//     /**
-//      * 组件的初始数据
-//      */
-//     data: {
-//         //TO-DO 从服务器获得summary列表并展示 此处仅供参考
-//         summaryList: [{
-//                 id: 0,
-//                 author: "Li",
-//                 sumCont: "Hello",
-//                 tags: ["mind", "tree"]
-//             },
-//             {
-//                 id: 1,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 2,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 3,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             }, 
-//             {
-//                 id: 4,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 5,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 6,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 7,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             },
-//             {
-//                 id: 8,
-//                 author: "Lu",
-//                 sumCont: "Hi",
-//                 tags: ["man", "try"]
-//             }
-//         ]
-//     },
-
-//     /**
-//      * 组件的方法列表
-//      */
-//     methods: {
-
-//     }
-// })
-
+import {myService} from "../../utils/util"
 Component({
 
     externalClasses: ['scrollclass'],
@@ -97,15 +12,45 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        tagId:{
-            type:Number,
-            value:1,
-
+        tagId: {
+            type: Number,
+            value: 1,
         },
+    },
 
-        summaryList: {
-            type: Object,
-            value: [{
+    /**
+     * 组件的初始数据
+     */
+    data: {
+        //TO-DO 从服务器获得summary列表并展示 此处仅供参考
+        currentPage: -1,
+        dataArray: [],
+        state: false,
+    },
+
+    // },
+    refresh: function () {
+        wx.showToast({
+                title: '刷新中',
+                icon: 'loading',
+                duration: 3000
+            }),
+            setTimeout(function () {
+                wx.showToast({
+                    title: '刷新成功',
+                    icon: 'success',
+                    duration: 2000
+                })
+            }, 3000)
+    },
+    /**
+     * 组件的方法列表
+     */
+
+    methods: {
+        onBottom(e) {
+            this.data.currentPage += 1;
+            var redata = [{
                     id: 0,
                     title: "标题一",
                     author: "作者",
@@ -166,7 +111,7 @@ Component({
                     title: "biaoti7",
                     author: "Lu",
                     sumCont: "Hi",
-                    tags: ["man", "try"], 
+                    tags: ["man", "try"],
                     avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 },
                 {
@@ -177,57 +122,48 @@ Component({
                     tags: ["man", "try"],
                     avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
                 }
-            ]
-        }
-    },
+            ];
+            this.data.dataArray.push(redata)
+            this.setData({
+                ["dataArray[" + this.data.currentPage + "]"]: redata
+            });
 
-    /**
-     * 组件的初始数据
-     */
-    data: {
-        //TO-DO 从服务器获得summary列表并展示 此处仅供参考
-
-        state: false,
-
-    },
-
-    // },
-    refresh:function(){
-        wx.showToast({
-          title: '刷新中',
-          icon:'loading',
-          duration:3000
-        }),
-        setTimeout(function(){
-          wx.showToast({
-            title: '刷新成功',
-            icon: 'success',
-            duration: 2000
-          })
-        },3000)
-      },
-    /**
-     * 组件的方法列表
-     */
-    methods: {
-        onBottom(e)
-        {
-            console.log(e,this.data.tagId);
+            console.log(e, this.data.tagId);
+            wx.showLoading({
+                title: '加载中',
+            })
+            setTimeout(function () {
+                wx.hideLoading()
+            }, 500);
         },
 
         onRefresh(e) {
-            console.log(e);
-           
-            
-            this.setData({
-                state: false
-            });
-            wx.showLoading({
-                title: '刷新中',
-              })
-              setTimeout(function () {
-                wx.hideLoading()
-              }, 1000);
+            const that=this
+            myService({
+                url: "problem/tag/" + that.data.tagId+"?pageNum="+(that.data.currentPage+2),
+                success: function (res) {
+                    that.data.currentPage += 1;
+                    console.log(res)
+                    var redata =res.data.data
+                    that.data.dataArray.push(redata)
+                    that.setData({
+                        ["dataArray[" + that.data.currentPage + "]"]: redata,
+                        state:false
+                    });
+        
+                },
+                fail: function (err) {
+                    console.log(err)
+                },
+                method: "GET",
+              
+            })
+ 
         },
+        
+    },
+    lifetimes: {
+        // ready: function () {
+        // }
     }
 })

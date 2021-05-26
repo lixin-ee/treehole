@@ -1,3 +1,6 @@
+import {
+  myService
+} from "../../utils/util"
 Page({
   data: {
     pageTitle: "",
@@ -9,8 +12,8 @@ Page({
     editorHeight: 30,
     keyboardHeight: 0,
     isIOS: false,
-    textInput:"",
-    
+    textInput: "",
+
     tabData: [{
         id: 0,
         cont: "这得复制粘贴"
@@ -70,11 +73,11 @@ Page({
     if (!this.data.titleReadOnly) { // newProblem
       console.log("尝试发布一个新问题")
       if (this.data.problemTitle == "") {
-        // wx.showToast({
-        //   title: '问题标题不能为空！',
-        //   icon: 'none',
-        //   duration: 1500
-        // })
+        wx.showToast({
+          title: '问题标题不能为空！',
+          icon: 'none',
+          duration: 1500
+        })
         console.log('新问题发布失败，问题标题为空')
         return
       }
@@ -87,8 +90,27 @@ Page({
         console.log('新问题发布失败：问题描述为空')
         return
       }
-      console.log("新问题发布成功\nproblemTitle: ", this.data.problemTitle)
-      console.log("problemDescription: ", this.data.textInput)
+      const that = this
+      myService({
+        url: "problem",
+        data: {
+          title: this.data.problemTitle,
+          content: this.data.textInput,
+          isAnonymous: this.data.isAnonymous,
+          tagIds: this.data.result
+        },
+        method: "POST",
+        success: function (res) {
+          console.log("新问题发布成功\nproblemTitle: ", that.data.problemTitle)
+          console.log("problemDescription: ", that.data.textInput)
+          console.log(res)
+        },
+        fail: function (err) {
+          console.log("新问题发布失败")
+          console.log(err)
+        }
+      })
+
     } else {
       console.log("尝试发布一个新回答")
       if (this.data.textInput == "") {
@@ -102,23 +124,7 @@ Page({
       console.log("新回答发布成功\nanswer: ", this.data.textInput)
     }
 
-    //下面是测试wxwx.request
-    // wx.request({
-    //   url: 'http://124.70.1.254:3000/mock/11/problem', //仅为示例，并非真实的接口地址
-    //   data: {
-    //     x: '',
-    //     y: ''
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     console.log("success ", res.data)
-    //   },
-    //   fail(res) {
-    //     console.log("fail ", res)
-    //   }
-    // })
+
 
 
 
@@ -312,7 +318,6 @@ Page({
   },
 
   onChange(event) {
-    // console.log(event.detail)
     this.setData({
       result: event.detail,
     });

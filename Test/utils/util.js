@@ -14,6 +14,19 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
+var myService=function(p){
+  var baseUrl="http://124.70.1.254:3000/mock/11/"
+  wx.request({
+    url: baseUrl+p.url,
+    success:p.success,
+    fail:p.fail,
+    method:p.method,
+    data:p.data,
+    header:{wxtoken:getApp().globalData.wxt},
+  })
+}
+
 module.exports = {
-  formatTime
+  formatTime,
+  myService,
 }

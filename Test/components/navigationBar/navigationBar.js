@@ -27,7 +27,15 @@ Component({
     data: {
 
     },
-
+    lifetimes: {
+       ready:function()
+       {
+        console.log(".hometab0")
+        var current = this.selectComponent(".hometab0"+' .homelist')
+        console.log(current)
+        current.onRefresh() 
+       }
+    },
     /**
      * 组件的方法列表
      */
@@ -38,7 +46,9 @@ Component({
             //新内容的操作
             console.log(".hometab"+this.data.navData.navArray[e.detail.index].id)
             var current = this.selectComponent(".hometab"+this.data.navData.navArray[e.detail.index].id+' .homelist')
-            console.log(current)           
+            console.log(current)
+            if(current.data.currentPage===-1)
+            current.onRefresh() 
         }
     }
 })
