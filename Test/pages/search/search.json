@@ -1,6 +1,6 @@
 {
   "usingComponents": {
     "homeList":"/components/homeList/homeList",
-    "searchBar":"/components/searchBar/searchBar"
+    "searchBar2":"/components/searchBar2/searchBar2"
   }
 }

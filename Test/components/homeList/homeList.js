@@ -4,7 +4,9 @@
 // Component表示此为一个组件 而非页面(Page)
 // 组件的其他属性、函数请查阅微信开发者文档，如生命周期函数lifetimes，pageLifetimes
 // JSON是配置文件
-import {myService} from "../../utils/util"
+import {
+    myService
+} from "../../utils/util"
 Component({
 
     externalClasses: ['scrollclass'],
@@ -29,20 +31,7 @@ Component({
     },
 
     // },
-    refresh: function () {
-        wx.showToast({
-                title: '刷新中',
-                icon: 'loading',
-                duration: 3000
-            }),
-            setTimeout(function () {
-                wx.showToast({
-                    title: '刷新成功',
-                    icon: 'success',
-                    duration: 2000
-                })
-            }, 3000)
-    },
+
     /**
      * 组件的方法列表
      */
@@ -138,29 +127,43 @@ Component({
         },
 
         onRefresh(e) {
-            const that=this
+            const that = this
             myService({
-                url: "problem/tag/" + that.data.tagId+"?pageNum="+(that.data.currentPage+2),
+                url: "problem/tag/" + that.data.tagId + "?pageNum=" + (that.data.currentPage + 2),
                 success: function (res) {
                     that.data.currentPage += 1;
                     console.log(res)
-                    var redata =res.data.data
+                    var redata = res.data.data
+                    that.data.dataArray = []
                     that.data.dataArray.push(redata)
                     that.setData({
-                        ["dataArray[" + that.data.currentPage + "]"]: redata,
-                        state:false
+                        dataArray: that.data.dataArray,
+                        state: false
                     });
-        
+                    wx.showLoading({
+                        title: '刷新中',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 500);
+
                 },
                 fail: function (err) {
                     console.log(err)
+                    wx.showToast({
+                        title: '刷新失败',
+                        icon: 'error',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 500);
                 },
                 method: "GET",
-              
+
             })
- 
+
         },
-        
+
     },
     lifetimes: {
         // ready: function () {

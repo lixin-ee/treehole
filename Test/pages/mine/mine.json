@@ -2,6 +2,7 @@
   "usingComponents": {
     "myInfo":"/components/myInfo/myInfo",
     "myWork":"/components/myWork/myWork",
-    "searchBar":"/components/searchBar/searchBar"
+    "searchBar":"/components/searchBar/searchBar",
+    "van-button": "@vant/weapp/button/index"
   }
 }

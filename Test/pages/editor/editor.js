@@ -57,16 +57,7 @@ Page({
   },
 
   onClickLeft() {
-    /*
-    wx.navigateBack({
-      delta: 2,
-    })
-    */
-    console.log(getCurrentPages())
-    wx.navigateTo({
-      url: 'pages/home/home',
-    })
-
+    wx.navigateBack();
   },
 
   onClickRight(e) {
@@ -81,7 +72,7 @@ Page({
         console.log('新问题发布失败，问题标题为空')
         return
       }
-      if (this.data.textInput == "") {
+      if (this.data.textInput === "" || this.data.textInput=="\n") {
         wx.showToast({
           title: '问题描述不能为空！',
           icon: 'none',
@@ -104,6 +95,11 @@ Page({
           console.log("新问题发布成功\nproblemTitle: ", that.data.problemTitle)
           console.log("problemDescription: ", that.data.textInput)
           console.log(res)
+          wx.navigateBack()
+          wx.showToast({
+            title: '发布成功！',
+            duration: 1500,
+          })
         },
         fail: function (err) {
           console.log("新问题发布失败")
@@ -112,8 +108,8 @@ Page({
       })
 
     } else {
-      console.log("尝试发布一个新回答")
-      if (this.data.textInput == "") {
+      console.log("尝试发布一个新回答", this.data.textInput)
+      if (this.data.textInput === "") {
         wx.showToast({
           title: '回答不能为空！',
           icon: 'none',
@@ -139,7 +135,7 @@ Page({
   },
 
   inputEditor(e) {
-    //console.log(e.detail.text)
+    console.log(e)
     this.setData({
       textInput: e.detail.text
     })
@@ -173,7 +169,7 @@ Page({
     }
   },
   onLoad(option) {
-    var temptype = "newProblem";
+    var temptype = (option.type === "problem" ? "newProblem" : "newAnswer");
     //temptype = "newAnswer"
     console.log(temptype)
     if (temptype == "newProblem") {
@@ -189,7 +185,6 @@ Page({
         placeholder: "请输入您的回答"
       })
     }
-    //console.log(option.query)
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({
