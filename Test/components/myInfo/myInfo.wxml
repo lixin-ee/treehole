@@ -13,10 +13,15 @@
   </view>
   <view class="nickname">
     <view class="^container">
-      <view style="width:80%">
+      <view style="width:80%" id="nickname">
         <open-data type="userNickName" lang="zh_CN"></open-data>
       </view>
-      <view style="width:80%">这里放id</view>
+      <view style="width:80%">
+      <van-cell-group>
+  <van-cell title="提问数" value="{{infoData.problemNum}}" />
+  <van-cell title="回答数" value="{{infoData.answerNum}}"  />
+</van-cell-group>
+</view>
     </view>
   </view>
 </view>

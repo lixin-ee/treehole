@@ -1,6 +1,7 @@
 {
     "component": true,
     "usingComponents": {
-        "summary":"/components/summary/summary"
+        "summary":"/components/summary/summary",
+        "van-toast": "@vant/weapp/toast/index"
     }
 }

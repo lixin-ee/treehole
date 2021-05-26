@@ -1,8 +1,79 @@
 /* components/summary/summary.wxss */
-
-.tagss{
-    display: inline;
-}
-:host{
+:host {
     display: block;
+}
+
+:host {
+    display: block;
+}
+
+.Block {
+    background: white;
+    box-shadow: 0rpx 0rpx 1rpx 1rpx #c9c9c9;
+    padding-bottom: 12rpx;
+    padding-top: 10rpx;
+}
+
+.Title {
+    text-overflow: ellipsis;
+    font-size: 35rpx;
+    font-weight: bold;
+    width: 95%;
+    margin-left: 10rpx;
+    
+}
+
+.Authorandtag {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin-top: 8rpx;
+}
+
+.image{
+    margin-left: 10rpx;
+}
+
+.Author {
+    font-size: 25rpx;
+    color: black;
+    margin-left: 10rpx;
+    width: 15%;
+}
+
+.tagss {
+    width: 80%;
+    height: 30rpx;
+    margin-left: 20rpx;
+    margin-right: 5rpx;
+}
+
+.chip {
+    background-color: rgb(159, 231, 253);
+    display: inline-block;
+    border-radius: 30rpx;
+    font-size: 20rpx;
+    font-weight: 250;
+    height: 30rpx;
+    padding: 3rpx 10rpx;
+    color: rgb(0, 0, 0);
+    margin-left: 20rpx;
+    vertical-align: 30rpx;
+}
+
+.SumCont {
+    font-size: 27rpx;
+    color: grey;
+    margin-left: 10rpx;
+    width: 95%;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

@@ -1,0 +1,20 @@
+/* components/homeList/homeList.wxss */
+/* wxss对应css文件 使用vant weapp后布局操作大多在wxml中实现 */
+/* .表示类选择器，#表示id选择器 */
+.swipesummary {
+  margin: 5rpx 0;
+  border: 5rpx solid grey;
+  width: 95%;
+ 
+  display: block;
+}
+
+.homeout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+:host {
+  display: block;
+}

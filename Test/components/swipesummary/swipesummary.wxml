@@ -1,0 +1,39 @@
+<!--components/siwpesummary/swipesummary.wxml-->
+<!-- 概要，放置于home页面下navigationBar对应的HomeList中 -->
+<!-- 用于展示问题的简单描述 -->
+<!-- 即在home页面中蓝色框圈出的部分，每个部分为一个summary -->
+<!-- 一个homeList中将会填充多个summary -->
+
+<van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}">
+
+    <van-cell-group class="Block">
+
+        <view class="Title">
+            {{sumData.title}}
+        </view>
+        <view class="SumCont">
+            {{sumData.sumCont}}
+        </view>
+
+        <view class="Timeandtag">
+            <view class="Time">
+                {{sumData.time}}
+            </view>
+            <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
+                <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item}}</view>
+            </scroll-view>
+        </view>
+
+    </van-cell-group>
+    <view slot="left" class="van-swipe-cell_left">
+        <view catchtap="toEdit" class="edit">
+            编辑
+        </view>
+    </view>
+    <view slot="right" class="van-swipe-cell_right">
+        <view catchtap="toDelete" class="delete">
+            删除
+        </view>
+    </view>
+
+</van-swipe-cell>

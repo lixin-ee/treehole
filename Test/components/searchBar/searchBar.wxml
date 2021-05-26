@@ -6,10 +6,11 @@
 <view >
        <van-search
   value="{{ value }}"
+  maxlength="12"
   placeholder="请输入搜索关键词"
   use-action-slot
   bind:change="onChange"
-  bind:search="onSearch"
+  show-action
 >
   <view slot="action" bind:tap="onClick">搜索</view>
 </van-search>

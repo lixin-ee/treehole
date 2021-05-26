@@ -1,9 +1,44 @@
 <!-- 编辑器界面 仅供了解 -->
 <view id="mainCon">
+  <!-- 顶部 导航栏 -->
   <van-nav-bar custom-style="padding-top: 0px;" safe-area-inset-top="{{false}}" left-text="返回" right-text="发布"
-    left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight"  />
+    left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" title="{{pageTitle}}" />
   <van-field value="{{ problemTitle }}" label="问题标题" placeholder="请输入问题标题" required="{{true}}"
     readonly="{{titleReadOnly}}" clearable="{{true}}" bind:input="inputTitle" />
+
+  <!-- 高级设置 按钮 -->
+  <van-cell title="高级设置" is-link bind:click="showDialog" />
+
+  <!-- 高级设置 按钮 对话框 -->
+  <van-dialog use-slot confirm-button-open-type="clickConfirm" show-cancel-button="clickCancel" title="设置"
+    show="{{ show }}" bind:close="onClose">
+    <view class="container">
+      <view>
+        <!-- 标签选择 复选框 -->
+        <scroll-view scroll-y="true" style="height:600rpx">
+          <van-checkbox-group class="tabChoose" value="{{ result }}" bind:change="onChange" max="{{ 10 }}"
+            wx:for="{{tabData}}" wx:key="id">
+            <van-checkbox icon-size="25px" name="{{item.id}}">{{item.cont}}</van-checkbox>
+          </van-checkbox-group>
+          <!-- 分割线 -->
+          <van-divider hairline borderColor="#000000" />
+          <!-- 是否匿名 复选框 -->
+          <van-checkbox icon-size="25px" name="{{AnonChoice}}" value="{{ anon }}" bind:change="onChange2">
+            是否匿名
+          </van-checkbox>
+        </scroll-view>
+      </view>
+    </view>
+
+
+
+  </van-dialog>
+
+
+
+
+
+
 
   <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange"
     bindready="onEditorReady" style="bottom:{{keyboardHeight}}px" bindinput="inputEditor" read-only="{{readOnly}}">

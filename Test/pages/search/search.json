@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "homeList":"/components/homeList/homeList",
+    "searchBar":"/components/searchBar/searchBar"
+  }
+}

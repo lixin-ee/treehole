@@ -1,0 +1,103 @@
+/* components/swipesummary/swipesummary.wxss */
+:host {
+  display: block;
+}
+
+.Block {
+  background: white;
+  box-shadow: 0rpx 0rpx 1rpx 1rpx #c9c9c9;
+  padding-bottom: 12rpx;
+  padding-top: 10rpx;
+
+}
+
+.Title {
+  text-overflow: ellipsis;
+  font-size: 35rpx;
+  font-weight: bold;
+  width: 95%;
+  margin-left: 10rpx;
+
+}
+
+.Timeandtag {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  margin-top: 10rpx;
+
+}
+
+.Time {
+  font-size: 25rpx;
+  color: black;
+  margin-left: 10rpx;
+  width: 32%;
+}
+
+.tagss {
+  width: 63%;
+  height: 30rpx;
+  margin-left: 20rpx;
+  margin-right: 5rpx;
+}
+
+.chip {
+  background-color: rgb(188, 230, 247);
+  display: inline-block;
+  border-radius: 30rpx;
+  font-size: 20rpx;
+  font-weight: 250;
+  height: 30rpx;
+  padding: 3rpx 10rpx;
+  color: rgb(0, 0, 0);
+  margin-left: 20rpx;
+  vertical-align: 30rpx;
+}
+
+.SumCont {
+  font-size: 27rpx;
+  color: grey;
+  margin-left: 10rpx;
+  width: 95%;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+
+  word-break: break-all;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.van-swipe-cell_left {
+  height: 100%;
+  font-size: 30rpx;
+  color: #fff;
+  background-color: rgb(24, 187, 9);
+  word-wrap: break-word;
+  padding: 0 22rpx;
+  box-sizing: border-box;
+  /*文本垂直居中*/
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.van-swipe-cell_right {
+  height: 100%;
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #f44;
+  word-wrap: break-word;
+  padding: 0 22rpx;
+  box-sizing: border-box;
+  /*文本垂直居中*/
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

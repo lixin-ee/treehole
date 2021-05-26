@@ -2,7 +2,7 @@
 <!-- 放置于问题详情界面中 -->
 <!-- 在问题详情中,第一个workDetails为提问,后续的workDetails为回答 -->
 <!-- 当此类型为回答时，隐藏标题栏 -->
-<view class="^container">
+<view class="^container Block">
   <view class="title" hidden="{{workData.type==='answer'}}">{{workData.title}}</view>
   <view class="authorInfo">
     <van-image style="display:inline-block;" round width="49rpx" height="49rpx" src="{{workData.avatar}}" />
@@ -12,7 +12,9 @@
   <view hidden="{{workData.type==='answer'}}" class="tags">
     <view wx:for="{{workData.tags}}" class="chip">{{item.name}}</view>
   </view>
-  <view class="content">
-    {{workData.content}}
-  </view>
+
+
+  <editor class="ql-container content" id="editor1" bindready="onEditorReady" read-only="true">
+
+  </editor>
 </view>

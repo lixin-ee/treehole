@@ -7,9 +7,8 @@ Component({
         infoData: {
             type: Object,
             value: {
-                headSrc: "null",
-                nickname: "Admin",
-                userId: "12345",
+                problemNum:"110",
+                answerNum:"534"
             }
         }
     },

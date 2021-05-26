@@ -1,5 +1,6 @@
 Page({
   data: {
+    pageTitle: "",
     formats: {},
     titleReadOnly: true,
     problemTitle: "",
@@ -8,12 +9,48 @@ Page({
     editorHeight: 30,
     keyboardHeight: 0,
     isIOS: false,
-    textInput: ""
+    textInput:"",
+    
+    tabData: [{
+        id: 0,
+        cont: "这得复制粘贴"
+      },
+      {
+        id: 1,
+        cont: "好高级啊"
+      },
+      {
+        id: 2,
+        cont: "还能一块跑"
+      },
+      {
+        id: 3,
+        cont: "嘿嘿嘿嘿"
+      },
+      {
+        id: 4,
+        cont: "你是这个意思"
+      },
+      {
+        id: 5,
+        cont: "他有点卡"
+      },
+      {
+        id: 6,
+        cont: "你是这个意思"
+      },
+      {
+        id: 7,
+        cont: "我下午写的接口没了"
+      },
+    ],
 
-  },
+    show: false,
 
-  properies: {
+    isAnonymous: 0,
+    anon: false, //用于将bool类型变量转换为枚举类型
 
+    result: ['1', '2'],
   },
 
   onClickLeft() {
@@ -22,23 +59,23 @@ Page({
       delta: 2,
     })
     */
-    console.log( getCurrentPages())
+    console.log(getCurrentPages())
     wx.navigateTo({
       url: 'pages/home/home',
     })
+
   },
 
   onClickRight(e) {
-    console.log(this.data.titleReadOnly)
-    //var temp
-    //this.editorCtx.
     if (!this.data.titleReadOnly) { // newProblem
+      console.log("尝试发布一个新问题")
       if (this.data.problemTitle == "") {
-        wx.showToast({
-          title: '标题不能为空！',
-          icon: 'none',
-          duration: 1500
-        })
+        // wx.showToast({
+        //   title: '问题标题不能为空！',
+        //   icon: 'none',
+        //   duration: 1500
+        // })
+        console.log('新问题发布失败，问题标题为空')
         return
       }
       if (this.data.textInput == "") {
@@ -47,11 +84,13 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        console.log('新问题发布失败：问题描述为空')
         return
       }
-      console.log("problemTitle: ",this.data.problemTitle)
-      console.log("problemDescription: ",this.data.textInput)
+      console.log("新问题发布成功\nproblemTitle: ", this.data.problemTitle)
+      console.log("problemDescription: ", this.data.textInput)
     } else {
+      console.log("尝试发布一个新回答")
       if (this.data.textInput == "") {
         wx.showToast({
           title: '回答不能为空！',
@@ -60,8 +99,28 @@ Page({
         })
         return
       }
-      console.log("answer: ",this.data.textInput)
+      console.log("新回答发布成功\nanswer: ", this.data.textInput)
     }
+
+    //下面是测试wxwx.request
+    // wx.request({
+    //   url: 'http://124.70.1.254:3000/mock/11/problem', //仅为示例，并非真实的接口地址
+    //   data: {
+    //     x: '',
+    //     y: ''
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     console.log("success ", res.data)
+    //   },
+    //   fail(res) {
+    //     console.log("fail ", res)
+    //   }
+    // })
+
+
 
 
   },
@@ -70,7 +129,7 @@ Page({
     this.setData({
       problemTitle: e.detail
     })
-    console.log(this.data.problemTitle)
+    //console.log(this.data.problemTitle)
   },
 
   inputEditor(e) {
@@ -113,10 +172,12 @@ Page({
     console.log(temptype)
     if (temptype == "newProblem") {
       this.setData({
+        pageTitle: "发布新问题",
         titleReadOnly: false
       })
     } else {
       this.setData({
+        pageTitle: "写新回答",
         titleReadOnly: true,
         problemTitle: "从上一页获取的标题",
         placeholder: "请输入您的回答"
@@ -236,5 +297,34 @@ Page({
         })
       }
     })
-  }
+  },
+
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+
+  showDialog(e) {
+    this.setData({
+      show: true,
+    })
+  },
+
+  onChange(event) {
+    // console.log(event.detail)
+    this.setData({
+      result: event.detail,
+    });
+  },
+
+  // 此函数用于修改是否匿名的状态
+  onChange2(event) {
+    // console.log(event.detail)
+    this.setData({
+      anon: event.detail,
+    });
+    this.data.isAnonymous = (this.data.anon === true ? 1 : 0);
+    console.log(this.data.isAnonymous);
+  },
 })

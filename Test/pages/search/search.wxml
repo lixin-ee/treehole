@@ -1,0 +1,6 @@
+<!--pages/search/search.wxml-->
+<view class="searBar">
+    <searchBar class="myItem" id="sear"></searchBar>
+  </view>
+<homeList scrollclass="homeScroll" class="homelist">
+    </homeList>
