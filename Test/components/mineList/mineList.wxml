@@ -4,7 +4,9 @@
 <!-- wxml逻辑功能与html相同 区别为wxml多使用text和view 请注意使标签如<1></1>或自闭和<1/> -->
 <!-- 可以在标签中设置属性信息 -->
 <!-- 具体可查阅 -->
-<scroll-view scroll-top="{{scrollTop}}" class="scrollclass" scroll-y="true" bindrefresherrefresh="onRefresh"  bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}" refresher-threshold="100">
+<scroll-view scroll-top="{{scrollTop}}" class="scrollclass" scroll-y="true" bindrefresherrefresh="onRefresh"
+    bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}"
+    refresher-threshold="100">
     <view class="homeout">
         <swipesummary bind:myEvent="OnViewText" class="swipesummary" wx:for="{{swipesummaryList}}" wx:key="id" sumData="{{item}}">
         

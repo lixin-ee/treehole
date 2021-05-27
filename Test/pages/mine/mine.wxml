@@ -15,6 +15,3 @@
                 </view>
         </scroll-view>
 </view>
-
-<!-- <van-skeleton avator="true" title avatar row="4"> -->
-<!-- </van-skeleton> -->

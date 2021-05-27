@@ -19,7 +19,7 @@ Component({
       // console.log(this.data)
       // console.log(e)
       const index = e.detail
-      console.log(this.data.list[index].pagePath)
+      // console.log(this.data.list[index].pagePath)
       // const url = data.path
 
       // switchTab 跳转到Tabbar界面

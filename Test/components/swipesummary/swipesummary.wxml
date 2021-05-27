@@ -19,7 +19,7 @@
 
         <view class="Timeandtag">
             <view class="Time">
-                {{sumData.time}}
+                {{sumData.updateTime}}
             </view>
             <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
                 <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item.tagName}}</view>

@@ -11,10 +11,12 @@ Component({
                     {
                         title:"我的提问",
                         id:"0",
+                        type:"problems",
                     },
                     {
                         title:"我的回答",
                         id:"1",
+                        type:"answers",
                     }
                 ]
             }

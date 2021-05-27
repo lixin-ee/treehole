@@ -7,6 +7,8 @@
 import {
     myService
 } from "../../utils/util"
+
+
 Component({
 
     externalClasses: ['scrollclass'],
@@ -38,118 +40,68 @@ Component({
 
     methods: {
         onBottom(e) {
+            // console(this.data)
+            // console("'onBottom' in homelist")
+            // console.log("this is 'on bottom' in homelist")
             this.data.currentPage += 1;
-            var redata = [{
-                    id: 0,
-                    title: "标题一",
-                    author: "作者",
-                    content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
-                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 1,
-                    title: "title",
-                    author: "author",
-                    content: "Hi, boy! Nice to meet you! How are you, Jack?",
-                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 2,
-                    title: "biaoti2",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 3,
-                    title: "biaoti3",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag66666666", "tag777777", "tag8", "tag9", "tag10"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 4,
-                    title: "biaoti4",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["man", "try"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 5,
-                    title: "biaoti5",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["man", "try"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 6,
-                    title: "biaoti6",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["man", "try"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 7,
-                    title: "biaoti7",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["man", "try"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                },
-                {
-                    id: 8,
-                    title: "biaoti8",
-                    author: "Lu",
-                    content: "Hi",
-                    tags: ["man", "try"],
-                    avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-                }
-            ];
-            this.data.dataArray.push(redata)
-            this.setData({
-                ["dataArray[" + this.data.currentPage + "]"]: redata
-            });
-
-            console.log(e, this.data.tagId);
-            wx.showLoading({
-                title: '加载中',
-            })
-            setTimeout(function () {
-                wx.hideLoading()
-            }, 500);
-        },
-
-        onRefresh(e) {
-            const that = this
             myService({
-                url: "problem/tag/" + that.data.tagId + "?pageNum=" + (that.data.currentPage + 2),
-                success: function (res) {
-                    that.data.currentPage += 1;
-                    console.log(res)
+                url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
+                success: (res) => {
+                    // console.log(res)
                     var redata = res.data.data
-                    that.data.dataArray = []
-                    that.data.dataArray.push(redata)
-                    that.setData({
-                        dataArray: that.data.dataArray,
+                    this.data.dataArray.push(redata)
+                    this.setData({
+                        dataArray: this.data.dataArray,
                         state: false
                     });
                     wx.showLoading({
-                        title: '刷新中',
+                        title: '加载中',
                     })
                     setTimeout(function () {
                         wx.hideLoading()
                     }, 500);
 
                 },
-                fail: function (err) {
-                    console.log(err)
+                fail: (err) => {
+                    // console.log(err)
+                    wx.showToast({
+                        title: '加载失败',
+                        icon: 'error',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 500);
+                },
+                method: "GET",
+            })
+        },
+
+        onRefresh(e) {
+            // console.log(this.data)
+            // console.log("'onRefresh' in homelist")
+            myService({
+                url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
+                success: (res) => {
+                    this.data.currentPage += 1;
+                    // console.log(res)
+                    // console.log("in 'onRefresh' in homelist")
+                    var redata = res.data.data
+                    this.data.dataArray = []
+                    this.data.dataArray.push(redata)
+                    this.setData({
+                        dataArray: this.data.dataArray,
+                        state: false
+                    });
+                    // console.log(this.data.dataArray)
+                    wx.showLoading({
+                        title: '刷新中',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 500);
+                },
+                fail: (err) => {
+                    // console.log(err)
                     wx.showToast({
                         title: '刷新失败',
                         icon: 'error',
@@ -159,7 +111,6 @@ Component({
                     }, 500);
                 },
                 method: "GET",
-
             })
 
         },

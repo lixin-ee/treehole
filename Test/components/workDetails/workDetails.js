@@ -1,24 +1,33 @@
 // components/workDetail/workDetails.js
+import {
+    myService
+} from "../../utils/util"
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
+        workType: {
+            type: String,
+            value: "problem",
+        },
         workData: {
             type: Object,
             value: {
-                id: 1,
                 author: "author",
-                type: "problem",
-                content: "11111111111222222222222222233333333333333333444445555555555555666666666666666667777777777777777777788888888888888888888889999999999999999900000000000000000000",
+                anthor: "anthor",
+                detail: "111",
                 title: "How to complete miniprogram",
-                time: "2021-5-22 10:12",
+                updateTime: "2021-5-22 10:12",
                 tags: [{
-                    name: "标签1"
+                    tagName: "标签1",
+                    tagId: 345
                 }, {
-                    name: "标签哈哈哈"
+                    tagName: "标签哈哈哈",
+                    tagId: 567,
                 }, {
-                    name: "标签2"
+                    tagName: "标签2",
+                    tagId: 54564
                 }],
                 avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
             }
@@ -34,13 +43,7 @@ Component({
 
     },
     lifetimes: {
-        // ready: function () {
-        //     // this.selectComponent("#editor")
-        //     const that = this
-        //     wx.createSelectorQuery().select('#editor').context(function (res) {
-        //       that.editorCtx = res.context
-        //     }).exec()
-        // }
+
     },
 
     /**
@@ -54,12 +57,13 @@ Component({
         },
 
         onEditorReady() {
+            // console.log(this.data.workData)
+            // console.log("------------")
             const that = this
             this.createSelectorQuery().select('#editor1').context(function (res) {
-                // console.log(res)
                 that.editorCtx = res.context
                 that.editorCtx.setContents({
-                    html: that.data.workData.content,
+                    html: that.data.workData.detail,
                     success: function () {}
                 })
 

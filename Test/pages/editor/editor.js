@@ -1,5 +1,9 @@
+import {
+  myService
+} from "../../utils/util"
 Page({
   data: {
+    pageTitle: "",
     formats: {},
     titleReadOnly: true,
     problemTitle: "",
@@ -10,40 +14,14 @@ Page({
     isIOS: false,
     textInput: "",
 
-
     tabData: [{
-        id: 0,
-        cont: "这得复制粘贴"
-      },
-      {
-        id: 1,
-        cont: "好高级啊"
-      },
-      {
-        id: 2,
-        cont: "还能一块跑"
-      },
-      {
-        id: 3,
-        cont: "嘿嘿嘿嘿"
-      },
-      {
-        id: 4,
-        cont: "你是这个意思"
-      },
-      {
-        id: 5,
-        cont: "他有点卡"
-      },
-      {
-        id: 6,
-        cont: "你是这个意思"
-      },
-      {
-        id: 7,
-        cont: "我下午写的接口没了"
-      },
-    ],
+      tagName: "Q",
+      tagId: "1234",
+    }, 
+    {
+      tagName:"B",
+      tagId:"145",
+    }],
 
     show: false,
 
@@ -51,11 +29,6 @@ Page({
     anon: false, //用于将bool类型变量转换为枚举类型
 
     result: ['1', '2'],
-
-  },
-
-  properies: {
-
   },
 
   onClickLeft() {
@@ -63,30 +36,55 @@ Page({
   },
 
   onClickRight(e) {
-    console.log(this.data.titleReadOnly)
-    //var temp
-    //this.editorCtx.
     if (!this.data.titleReadOnly) { // newProblem
+      console.log("尝试发布一个新问题")
       if (this.data.problemTitle == "") {
         wx.showToast({
-          title: '标题不能为空！',
+          title: '问题标题不能为空！',
           icon: 'none',
           duration: 1500
         })
+        console.log('新问题发布失败，问题标题为空')
         return
       }
-      if (this.data.textInput == "") {
+      if (this.data.textInput === "" || this.data.textInput == "\n") {
         wx.showToast({
           title: '问题描述不能为空！',
           icon: 'none',
           duration: 1500
         })
+        console.log('新问题发布失败：问题描述为空')
         return
       }
-      console.log("problemTitle: ", this.data.problemTitle)
-      console.log("problemDescription: ", this.data.textInput)
+      const that = this
+      myService({
+        url: "problem",
+        data: {
+          title: this.data.problemTitle,
+          content: this.data.textInput,
+          isAnonymous: this.data.isAnonymous,
+          tagIds: this.data.result
+        },
+        method: "POST",
+        success: function (res) {
+          console.log("新问题发布成功\nproblemTitle: ", that.data.problemTitle)
+          console.log("problemDescription: ", that.data.textInput)
+          console.log(res)
+          wx.navigateBack()
+          wx.showToast({
+            title: '发布成功！',
+            duration: 1500,
+          })
+        },
+        fail: function (err) {
+          console.log("新问题发布失败")
+          console.log(err)
+        }
+      })
+
     } else {
-      if (this.data.textInput == "") {
+      console.log("尝试发布一个新回答", this.data.textInput)
+      if (this.data.textInput === "") {
         wx.showToast({
           title: '回答不能为空！',
           icon: 'none',
@@ -94,8 +92,12 @@ Page({
         })
         return
       }
-      console.log("answer: ", this.data.textInput)
+      console.log("新回答发布成功\nanswer: ", this.data.textInput)
     }
+
+
+
+
 
 
   },
@@ -104,11 +106,11 @@ Page({
     this.setData({
       problemTitle: e.detail
     })
-    console.log(this.data.problemTitle)
+    //console.log(this.data.problemTitle)
   },
 
   inputEditor(e) {
-    //console.log(e.detail.text)
+    console.log(e)
     this.setData({
       textInput: e.detail.text
     })
@@ -143,21 +145,39 @@ Page({
   },
 
   onLoad(option) {
-    var temptype = (option.type==="problem"?"newProblem":"newAnswer");
+      //用于获取所有标签，以供选择
+      myService({
+        url: "tag/all",
+        success: (res) => {
+          // console.log(res.data)
+          this.setData({
+           "tabData": res.data
+          })
+        },
+        fail: (err) => {
+          // console.log(err)
+        },
+        method: "GET",
+      })
+
+
+    //界面设置
+    var temptype = (option.type === "problem" ? "newProblem" : "newAnswer");
     //temptype = "newAnswer"
     console.log(temptype)
     if (temptype == "newProblem") {
       this.setData({
+        pageTitle: "发布新问题",
         titleReadOnly: false
       })
     } else {
       this.setData({
+        pageTitle: "写新回答",
         titleReadOnly: true,
         problemTitle: "从上一页获取的标题",
         placeholder: "请输入您的回答"
       })
     }
-    // console.log(option.query)
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({
@@ -286,7 +306,6 @@ Page({
   },
 
   onChange(event) {
-    // console.log(event.detail)
     this.setData({
       result: event.detail,
     });
@@ -301,4 +320,6 @@ Page({
     this.data.isAnonymous = (this.data.anon === true ? 1 : 0);
     console.log(this.data.isAnonymous);
   },
+
+
 })

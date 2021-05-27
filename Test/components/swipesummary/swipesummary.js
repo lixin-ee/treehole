@@ -13,7 +13,8 @@ Component({
         id: 0,
         title: "biaoti0",
         problemId: 123,
-        time: "2021-5-22 10:12",
+        updateTime: "2021-5-22 10:12",
+        isAnonymous:0,
         content: "There's no content 234254363463453253",
         tags: [{
             tagName: "tag1",
