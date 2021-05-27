@@ -16,7 +16,7 @@ page{
 #myin {
     height: 33%;
     width:100%;
-    border:5rpx solid #0000ff;
+    /* border:5rpx solid #0000ff; */
 
 }
 

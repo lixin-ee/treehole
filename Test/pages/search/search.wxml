@@ -1,6 +1,6 @@
 <!--pages/search/search.wxml-->
 <view class="searBar">
-    <searchBar class="myItem" id="sear"></searchBar>
+    <searchBar2 class="myItem" id="sear" value="{{searchKey}}"></searchBar2>
   </view>
 <homeList scrollclass="homeScroll" class="homelist">
     </homeList>

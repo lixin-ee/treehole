@@ -20,7 +20,14 @@
     width:60%;
     /* display: inline-block; */
     height: 100%;
-    border:2rpx solid #0000ff;
+    /* border:2rpx solid #0000ff; */
     position: relative;
+}
+
+.outer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 

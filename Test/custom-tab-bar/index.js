@@ -6,14 +6,7 @@ Component({
     list: [{
         pagePath: "/pages/home/home",
         text: "问答"
-      }, {
-        pagePath: "/pages/editor/editor",
-        text: "发布"
-      },
-      {
-        pagePath: "/pages/details/details",
-        text: "详情"
-      },
+      }, 
       {
         pagePath: "/pages/mine/mine",
         text: "我的"

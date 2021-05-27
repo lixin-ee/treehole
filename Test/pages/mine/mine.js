@@ -1,12 +1,11 @@
 // pages/mine/mine.js
 Page({
-    data: {
-        },
+    data: {},
 
     /**
      * 页面的初始数据和一些函数
      */
-   
+
 
     /**
      * 生命周期函数--监听页面加载
@@ -27,11 +26,11 @@ Page({
      */
     onShow: function () {
         if (typeof this.getTabBar === 'function' &&
-              this.getTabBar()) {
-              this.getTabBar().setData({
+            this.getTabBar()) {
+            this.getTabBar().setData({
                 selected: 3
-              })
-          }
+            })
+        }
     },
 
     /**
@@ -67,5 +66,11 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    clickAddProblem() {
+        wx.navigateTo({
+            url: "/pages/editor/editor?type=" + "problem",
+        })
     }
 })

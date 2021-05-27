@@ -1,0 +1,4 @@
+/* components/searchBar2/searchBar2.wxss */
+:host {
+    display: block;
+}

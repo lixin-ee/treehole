@@ -20,7 +20,8 @@
             {{sumData.author}}
         </view>
         <scroll-view class="tagss" scroll-x="true">
-            <view wx:for="{{sumData.tags}}" wx:key="tagId" class="chip">{{item.tagName}}</view>
+            <view wx:for="{{sumData.tags}}" style="display:(item.tagName===''?'none':'' )"
+ wx:key="tagId" class="chip">{{item.tagName}}</view>
         </scroll-view>
     </view>
 </view>

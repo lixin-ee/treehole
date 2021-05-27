@@ -12,6 +12,7 @@ Component({
      */
     data: {
               value: '',
+              proValue:'123',
             },
             
 

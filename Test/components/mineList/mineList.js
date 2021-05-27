@@ -18,73 +18,289 @@ Component({
    */
   properties: {
   
-      swipesummaryList: {
-          type: Object,
-          value: [{
-                  id: 0,
-                  title:"标题一",
-                  time: "2021-5-22 10:12",
-                  sumCont: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
-                  tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
-              },
-              {
-                  id: 1,
-                  title:"title",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi, boy! Nice to meet you! How are you, Jack?Hi, boy! Nice to meet you! How are you, Jack?Hi, boy! Nice to meet you! How are you, Jack?",
-                  tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
-              },
-              {
-                  id: 2,
-                  title:"biaoti2",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
-              },
-              {
-                  id: 3,
-                  title:"biaoti3",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags:["tag1","tag2","tag3","tag4","tag5","tag66666666","tag777777","tag8","tag9","tag10"],
-              },
-              {
-                  id: 4,
-                  title:"biaoti4",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags: ["man", "try"]
-              },
-              {
-                  id: 5,
-                  title:"biaoti5",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags: ["man", "try"]
-              },
-              {
-                  id: 6,
-                  title:"biaoti6",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags: ["man", "try"]
-              },
-              {
-                  id: 7,
-                  title:"biaoti7",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags: ["man", "try"]
-              },
-              {
-                  id: 8,
-                  title:"biaoti8",
-                  time: "2021-5-22 10:12",
-                  sumCont: "Hi",
-                  tags: ["man", "try"]
-              }
-          ]
-      }
+    swipesummaryList: {
+        type: Object,
+        value: 
+
+        [{
+                id: 0,
+                title: "标题一",
+                problemId: 1,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                    {
+                        tagName:"tag123",
+                        tagId:"123",
+                    },
+                    {
+                        tagName:"tag123",
+                        tagId:"123",
+                    },
+                    {
+                        tagName:"tag123",
+                        tagId:"123",
+                    },
+                    {
+                        tagName:"tag123",
+                        tagId:"123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 1,
+                title: "标题二",
+                problemId: 2,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 2,
+                title: "标题三",
+                problemId: 3,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 3,
+                title: "标题四",
+                problemId: 4,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 4,
+                title: "标题五",
+                problemId: 5,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 5,
+                title: "标题六",
+                problemId: 6,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 6,
+                title: "标题七",
+                problemId: 7,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 7,
+                title: "标题八",
+                problemId: 8,
+                time: "2021-5-22 10:12",
+                content: "今天写了一篇文章，不多不少，刚好一共二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积分很深刻的房间has你就看到12342354325436532625435今天写了一篇文章，不多不少，刚好一共二十个字二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag3",
+                        tagId: "3",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+            },
+            {
+                id: 8,
+                title: "标题九",
+                problemId: 9,
+                time: "2021-5-22 10:12",
+                content: "今天写呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积二十个字呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕好卡积",
+                tags: [{
+                        tagName: "tag1",
+                        tagId: "1",
+                    },
+                    {
+                        tagName: "tag6",
+                        tagId: "6",
+                    },
+                    {
+                        tagName: "tag9",
+                        tagId: "9",
+                    },
+                    {
+                        tagName: "tag6666",
+                        tagId: "6666",
+                    },
+                    {
+                        tagName: "tag123",
+                        tagId: "123",
+                    },
+                ],
+                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
+          },
+        ]}
+    
   },
 
   /**
@@ -100,11 +316,28 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    OnViewText(e){
+        console.log(e.detail);
+        var problemid=0;
+        for(var i=0;i<this.data.swipesummaryList.length;i++)
+        {
+            if(e.detail==this.data.swipesummaryList[i].problemId)
+            {
+                problemid=i;
+                i=this.data.swipesummaryList.length;
+            }
+        };
+        this.data.swipesummaryList.splice(problemid,1);
+        
+        this.setData({
+            swipesummaryList:this.data.swipesummaryList,
+        })
+      },
       onBottom(e)
       {
           console.log(e);
       },
-     
+    
       onRefresh(e)
       {
           console.log(e);

@@ -47,15 +47,20 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        clickAddAnswer() {
+            wx.navigateTo({
+                url: "/pages/editor/editor?type=" + this.data.workData.title
+            })
+        },
+
         onEditorReady() {
             const that = this
             this.createSelectorQuery().select('#editor1').context(function (res) {
                 // console.log(res)
                 that.editorCtx = res.context
                 that.editorCtx.setContents({
-                    html:that.data.workData.content,
-                    success:function(){
-                    }
+                    html: that.data.workData.content,
+                    success: function () {}
                 })
 
             }).exec()
