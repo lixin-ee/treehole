@@ -66,16 +66,16 @@ Component({
    */
   methods: {
     clickSwipesummary() {
-      console.log(this.data.sumData)
+      // console.log(this.data.sumData)
       wx.navigateTo({
-        url: "/pages/details/details?problemId=" + this.data.problemId,
+        url: "/pages/details/details?problemId=" + this.data.sumData.problemId,
       })
     },
     toEdit(e)
     {
-        console.log(e)
+        // console.log(e)
        wx.navigateTo({
-         url:"/pages/editor/editor?problemId="+this.data.problemId,
+         url:"/pages/editor/editor?problemId="+this.data.sumData.problemId,
        })
     },
     toDelete:function(e) {

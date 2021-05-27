@@ -118,8 +118,8 @@ Component({
                             swipesummaryList: res.data.data,
                             state: false
                         });
-                        console.log(this.data.swipesummaryList)
-                        console.log("problems-----------")
+                        // console.log(this.data.swipesummaryList)
+                        // console.log("problems-----------")
                         wx.showLoading({
                             title: '加载中',
                         })
@@ -146,13 +146,13 @@ Component({
                 myService({
                     url: "answer/myAnswers",
                     success: (res) => {
-                        console.log(res.data.data)
+                        // console.log(res.data.data)
                         this.setData({
                             swipesummaryList: res.data.data,
                             state: false
                         });
-                        console.log(this.data.swipesummaryList)
-                        console.log("answers------------")
+                        // console.log(this.data.swipesummaryList)
+                        // console.log("answers------------")
                         wx.showLoading({
                             title: '加载中',
                         })
@@ -196,15 +196,16 @@ Component({
         this.setData({
             swipesummaryList:this.data.swipesummaryList,
         })
+        
       },
       onBottom(e)
       {
-          console.log(e);
+        //   console.log(e);
       },
     
       onRefresh(e)
       {
-          console.log(e);
+        //   console.log(e);
           this.setData({
               state:false
           })

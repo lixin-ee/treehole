@@ -14,6 +14,11 @@ Page({
     isIOS: false,
     textInput: "",
 
+    //用于修改时，获得原本的信息
+    sumData:[{
+
+    }],
+
     tabData: [{
       tagName: "Q",
       tagId: "1234",
@@ -145,6 +150,8 @@ Page({
   },
 
   onLoad(option) {
+    console.log(option)
+    console.log("options-------")
       //用于获取所有标签，以供选择
       myService({
         url: "tag/all",
