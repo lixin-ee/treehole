@@ -15,10 +15,10 @@
     <view class="container">
       <view>
         <!-- 标签选择 复选框 -->
-        <scroll-view scroll-y="true" style="height:600rpx">
-          <van-checkbox-group class="tabChoose" value="{{ result }}" bind:change="onChange" max="{{ 10 }}"
-            wx:for="{{tabData}}" wx:key="id">
-            <van-checkbox icon-size="25px" name="{{item.id}}">{{item.cont}}</van-checkbox>
+        <scroll-view scroll-y="true" class="tabChoose" style="height:600rpx">
+          <van-checkbox-group  value="{{ result }}" bind:change="onChange" max="{{ 10 }}"
+            wx:for="{{tabData}}" wx:key="tagId">
+            <van-checkbox class="tabChoose2" icon-size="25px" name="{{item.tagId}}">{{item.tagName}}</van-checkbox>
           </van-checkbox-group>
           <!-- 分割线 -->
           <van-divider hairline borderColor="#000000" />

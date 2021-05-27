@@ -1,4 +1,7 @@
 // components/navigationBar/navigationBar.js
+import {
+    myService
+} from "../../utils/util"
 Component({
     /**
      * 组件的属性列表
@@ -8,14 +11,14 @@ Component({
             type: Object,
             value: {
                 navArray: [{
-                    title: "HTML",
-                    id: "0",
+                    tagName: "HTML",
+                    tagId: 0,
                 }, {
-                    title: "CSS",
-                    id: "1",
+                    tagName: "CSS",
+                    tagId: 1,
                 }, {
-                    title: "JavaScript",
-                    id: "2",
+                    tagName: "JavaScript",
+                    tagId: 2,
                 }],
             },
         }
@@ -27,28 +30,44 @@ Component({
     data: {
 
     },
+    pageLifetimes: {
+
+    },
+
     lifetimes: {
-       ready:function()
-       {
-        console.log(".hometab0")
-        var current = this.selectComponent(".hometab0"+' .homelist')
-        console.log(current)
-        current.onRefresh() 
-       }
+       created: function () {
+            myService({
+                url: "tag/all",
+                success: (res) => {
+                    this.setData({
+                        "navData.navArray": res.data
+                    })
+                },
+                fail: (err) => {
+                },
+                method: "GET",
+            })
+        },
+
+        ready: function () {
+            var current = this.selectComponent(".hometab" +this.data.navData.navArray["0"].tagId+ ' .homelist')
+            // console.log(current)
+            current.onRefresh()
+            // console.log("'ready' in navigationBar2")
+        },
     },
     /**
      * 组件的方法列表
      */
-    // console.log是控制台输出函数，用于调试中获取内容，验证正确性
     methods: {
         OnChange(e) {
             //改变后获得了当前homelist的this对象current，可通过调用current的方法实现切换页面后是否读
             //新内容的操作
-            console.log(".hometab"+this.data.navData.navArray[e.detail.index].id)
-            var current = this.selectComponent(".hometab"+this.data.navData.navArray[e.detail.index].id+' .homelist')
-            console.log(current)
-            if(current.data.currentPage===-1)
-            current.onRefresh() 
+            // console.log(".hometab" + this.data.navData.navArray[e.detail.index].tagId)
+            var current = this.selectComponent(".hometab" + this.data.navData.navArray[e.detail.index].tagId + ' .homelist')
+            // console.log(current)
+            if (current.data.currentPage === -1)
+                current.onRefresh()
         }
     }
 })

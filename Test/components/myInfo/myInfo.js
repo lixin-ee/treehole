@@ -1,4 +1,7 @@
 // components/myInfo/myInfo.js
+import {
+    myService
+} from "../../utils/util"
 Component({
     /**
      * 组件的属性列表
@@ -7,8 +10,8 @@ Component({
         infoData: {
             type: Object,
             value: {
-                problemNum:"110",
-                answerNum:"534"
+                problemNum: "110",
+                answerNum: "534"
             }
         }
     },
@@ -22,13 +25,27 @@ Component({
 
     /**
      * 组件的方法列表
+    
      */
+    lifetimes:{
+        ready() {
+            myService({
+                url:"account/info",
+                success:(res)=>{
+                    // console.log(res)
+                    this.setData({
+                       "infoData":res.data.data
+                    })
+                },
+                fail:(err)=>{
+                    console.log(err)
+                },
+                method:"GET",
+            })
+        }
+    },
+
     methods: {
-onLoad()
-{
-    // wewx.request({
-    //   url: 'account/info',
-    // })
-}
+        
     }
 })

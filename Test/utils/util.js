@@ -22,12 +22,12 @@ var myService=function(p){
     fail:p.fail,
     method:p.method,
     data:p.data,
-    header:p.header,
+    header:{wxtoken:getApp().globalData.wxt},
   })
 }
 
 module.exports = {
   formatTime,
-  myService
+  myService,
 }
 

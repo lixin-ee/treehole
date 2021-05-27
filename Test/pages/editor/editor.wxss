@@ -50,6 +50,12 @@
 
 .tabChoose
 {
-  padding-top:30rpx
+  padding-top:20rpx
 }
+
+.tabChoose2
+{
+  padding-top:10rpx
+}
+
 

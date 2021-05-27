@@ -8,6 +8,6 @@
  
 
   <view class="naviBar">
-    <navigationBar class="myItem" id="navi"></navigationBar>
+    <navigationBar  class="myItem" id="navi"></navigationBar>
   </view>
 </view>
