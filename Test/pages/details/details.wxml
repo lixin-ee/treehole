@@ -3,11 +3,11 @@
 <!-- 这个页面显示不出底部是正常的，之后用到该界面时无需底部 -->
 <scroll-view>
     <view id="problem">
-        <workDetails workData="{{problem}}">
+        <workDetails workData="{{myProblem}}" ProblemId="{{myProblem.problemId}}" workType="problem">
         </workDetails>
     </view>
     <view class="answers" wx:for="{{myAnswerList}}" wx:key="id">
-        <workDetails workData="{{item}}">
+        <workDetails workData="{{item}}" workType="answers">
         </workDetails>
     </view>
 </scroll-view>

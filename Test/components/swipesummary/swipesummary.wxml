@@ -5,7 +5,8 @@
 <!-- 一个homeList中将会填充多个summary -->
 
 <view >
-<van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}">
+<van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}" async-close
+  bind:close="onClose">
 
     <van-cell-group  bindtap="clickSwipesummary" class="Block">
 
@@ -18,7 +19,7 @@
 
         <view class="Timeandtag">
             <view class="Time">
-                {{sumData.time}}
+                {{sumData.updateTime}}
             </view>
             <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
                 <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item.tagName}}</view>
@@ -27,12 +28,12 @@
 
     </van-cell-group>
     <view slot="left" class="van-swipe-cell_left">
-        <view catchtap="toEdit" class="edit">
+        <view bindtap="toEdit" class="edit">
             编辑
         </view>
     </view>
     <view slot="right" class="van-swipe-cell_right">
-        <view catchtap="toDelete" class="delete">
+        <view bindtap="toDelete" class="delete">
             删除
         </view>
     </view>

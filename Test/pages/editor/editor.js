@@ -13,40 +13,22 @@ Page({
     keyboardHeight: 0,
     isIOS: false,
     textInput: "",
-    tempType: "",
+    problemId: 0,
+    //tempType: "",
+
+    //用于修改时，获得原本的信息
+    sumData: [{
+
+    }],
 
     tabData: [{
-        id: 0,
-        cont: "这得复制粘贴"
+        tagName: "Q",
+        tagId: "1234",
       },
       {
-        id: 1,
-        cont: "好高级啊"
-      },
-      {
-        id: 2,
-        cont: "还能一块跑"
-      },
-      {
-        id: 3,
-        cont: "嘿嘿嘿嘿"
-      },
-      {
-        id: 4,
-        cont: "你是这个意思"
-      },
-      {
-        id: 5,
-        cont: "他有点卡"
-      },
-      {
-        id: 6,
-        cont: "你是这个意思"
-      },
-      {
-        id: 7,
-        cont: "我下午写的接口没了"
-      },
+        tagName: "B",
+        tagId: "145",
+      }
     ],
 
     show: false,
@@ -270,10 +252,10 @@ Page({
                     myService({
                       url: "problem",
                       data: {
-                        title: that.data.problemTitle,
+
                         content: that.data.textInput,
                         isAnonymous: that.data.isAnonymous,
-                        tagIds: that.data.result,
+                        problemId: that.data.problemId,
                         detail: detail
                       },
                       method: "POST",
@@ -372,15 +354,33 @@ Page({
       })
     }
   },
+
   onLoad(option) {
-    this.setData({
-      tempType: (option.type === "problem" ? "newProblem" : "newAnswer")
-    })
-    //tempType = (option.type === "problem" ? "newProblem" : "newAnswer");
     console.log(option)
-    //tempType = "newAnswer"
-    //console.log(tempType)
-    if (this.data.tempType == "newProblem") {
+    console.log("options-------")
+    console.log(getCurrentPages())
+    //用于获取所有标签，以供选择
+    myService({
+      url: "tag/all",
+      success: (res) => {
+        // console.log(res.data)
+        this.setData({
+          "tabData": res.data,
+          problemId: option.problemId
+        })
+      },
+      fail: (err) => {
+        // console.log(err)
+      },
+      method: "GET",
+    })
+
+
+    //界面设置
+    var temptype = (option.type === "problem" ? "newProblem" : "newAnswer");
+    //temptype = "newAnswer"
+    console.log(temptype)
+    if (temptype == "newProblem") {
       this.setData({
         pageTitle: "发布新问题",
         titleReadOnly: false
@@ -535,4 +535,6 @@ Page({
     this.data.isAnonymous = (this.data.anon === true ? 1 : 0);
     console.log(this.data.isAnonymous);
   },
+
+
 })

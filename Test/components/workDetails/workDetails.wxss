@@ -8,7 +8,6 @@
   box-shadow: 0rpx 0rpx 1rpx 1rpx #c9c9c9;
 }
 
-
 .content {
   width: 95%;
   margin-bottom: 20rpx;
@@ -32,13 +31,14 @@
   margin-left: 30rpx;
 }
 .chip {
-  background-color: hotpink;
+  /* background-color: hotpink; */
+  background-color: rgb(159, 231, 253);
   display: inline-block;
   border-radius: 30rpx;
   font-size: 20rpx;
   height: 30rpx;
   padding: 3rpx 10rpx;
-  color: bisque;
+  color: black;
   margin-left: 20rpx;
   vertical-align: 13rpx;
 }

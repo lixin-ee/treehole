@@ -6,7 +6,6 @@ Page({
      */
     data: {
         searchKey:"tag1"
-
     },
 
     /**
