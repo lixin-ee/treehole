@@ -5,18 +5,20 @@ Page({
      * 页面的初始数据
      */
     data: {
-        searchKey:"tag1",
+        searchKey: "tag1",
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.searchKey=options.key
-        console.log(this.searchKey+" in search")
+        console.log(options)
+        this.setData({
+            searchKey:options.key
+        })
         var current = this.selectComponent(' .homelist')
-            if (current.data.currentPage === -1)
-                current.onRefresh()
+        if (current.data.currentPage === -1)
+            current.onRefresh()
     },
 
     /**
@@ -29,8 +31,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-    },
+    onShow: function () {},
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -65,5 +66,16 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    OnSearch2(option) {
+        console.log("this is in search 2")
+        console.log(option)
+        this.setData({
+            searchKey:option.detail.searchKey2
+        })
+        var current = this.selectComponent(' .homelist')
+        current.data.currentPage = -1;
+        current.onRefresh()
     }
 })
