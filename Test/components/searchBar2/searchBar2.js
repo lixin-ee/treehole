@@ -35,11 +35,7 @@ Component({
       this.setData({
         value: '',
       })
-      wx.navigateBack({
-      })
-      wx.navigateTo({
-        url: '/pages/search/search?key='+this.data.searchKey2,
-      })
+      this.triggerEvent('search2',{searchKey2:this.data.searchKey2})
     },
   }
 })

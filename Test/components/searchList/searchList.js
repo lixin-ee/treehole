@@ -40,7 +40,7 @@ Component({
             console.log("------------0")
             this.data.currentPage += 1;
             myService({
-                url: "problem/keyword/" + this.data.key + "?pageNum=" + (this.data.currentPage + 2),
+                url: "problem/keyword/" + this.data.searchKey + "?pageNum=" + (this.data.currentPage + 2),
                 success: (res) => {
                     var redata = res.data.data
                     this.data.dataArray.push(redata)
@@ -70,8 +70,11 @@ Component({
         },
 
         onRefresh(e) {
+            console.log(this)
+            console.log(this.data.currentPage)
+            console.log("123123---")
             myService({
-                url: "problem/keyword/" + this.data.key + "?pageNum=" + (this.data.currentPage + 2),
+                url: "problem/keyword/" + this.data.searchKey + "?pageNum=" + (this.data.currentPage + 2),
                 success: (res) => {
                     this.data.currentPage += 1;
                     var redata = res.data.data
