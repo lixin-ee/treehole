@@ -7,6 +7,9 @@ Component({
      * 组件的属性列表
      */
     properties: {
+        workId:{
+            type:Number,
+        },
         workType: {
             type: String,
             value: "problem",
@@ -16,7 +19,6 @@ Component({
             value: {
                 problemId: 123,
                 author: "author",
-                anthor: "anthor",
                 detail: "111",
                 title: "How to complete miniprogram",
                 updateTime: "2021-5-22 10:12",
@@ -50,33 +52,29 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        
+        refreshEditor()
+        {
+            this.editorCtx.setContents({
+                html: that.data.workData.detail,
+                success:()=> {console.log("fefefe",that.data.workData.detail)},
+                fail: (err) => {
+                    console.log(that.data.workData)
+                    console.log(err)
+                },
+            })
+        },
         clickAddAnswer() {
             console.log(this.data.workData)
             wx.navigateTo({
-                url: "/pages/editor/editor?type=answer&title=" + this.data.workData.title + "&problemId=" + this.data.workData.problemId
+                url: "/pages/editor/editor?type=answer&title=" + this.data.workData.title + "&problemId=" + this.data.workId
             })
         },
 
         onEditorReady() {
             const that = this
             this.createSelectorQuery().select('#editor1').context(function (res) {
+                console.log(res)
                 that.editorCtx = res.context
-                that.editorCtx.setContents({
-                    html: that.data.workData.detail,
-                    success:()=> {},
-                    fail: (err) => {
-                        wx.showToast({
-                            title: '详情初始化失败',
-                            icon: 'error',
-                        })
-                        setTimeout(function () {
-                            wx.hideLoading()
-                        }, 1000);
-                        console.log(err)
-                    },
-                })
-
             }).exec()
         },
     },

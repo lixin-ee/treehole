@@ -10,7 +10,7 @@
   <view class="authorInfo">
     <van-image style="display:inline-block;" round width="49rpx" height="49rpx" src="{{workData.avatar}}" />
     <view class="name" hidden="{{workType==='answers'}}">{{workData.author}}</view>
-    <view class="name" hidden="{{workType==='problem'}}">{{workData.anthor}}</view>
+    <view class="name" hidden="{{workType==='problem'}}">{{workData.author}}</view>
     <view class="time">{{workData.updateTime}}</view>
   </view>
   <view hidden="{{workType==='answers'}}" class="tags">

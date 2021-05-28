@@ -40,58 +40,77 @@ Component({
 
     methods: {
         onBottom(e) {
+            wx.showLoading({
+                title: '加载中',
+            })
             this.data.currentPage += 1;
             myService({
                 url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
                 success: (res) => {
-                    // console.log(res)
-                    var redata = res.data.data
-                    this.data.dataArray.push(redata)
-                    this.setData({
-                        dataArray: this.data.dataArray,
-                        state: false
-                    });
-                    wx.showLoading({
-                        title: '加载中',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
-
+                    if(res.data.code===200)
+                    {
+                        console.log(res)
+                        var redata = res.data.data
+                        this.data.dataArray.push(redata)
+                        this.setData({
+                            dataArray: this.data.dataArray,
+                            state: false
+                        });
+                        wx.showToast({
+                            title: '加载成功',
+                        })
+                    }
+                    else{
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'error',
+                            duration:500
+                        })
+                    }
+                 
                 },
                 fail: (err) => {
                     // console.log(err)
                     wx.showToast({
                         title: '加载失败',
                         icon: 'error',
+                        duration:500
                     })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
                 },
                 method: "GET",
             })
         },
 
         onRefresh(e) {
+            wx.showLoading({
+                title: '刷新中',
+            })
                 myService({
-                    url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
+                    url: "problem/tag/" + this.data.tagId + "?pageNum=1",
                     success: (res) => {
-                        this.data.currentPage += 1;
-                        var redata = res.data.data
-                        this.data.dataArray = []
-                        this.data.dataArray.push(redata)
-                        this.setData({
-                            dataArray: this.data.dataArray,
-                            state: false
-                        });
-                        // console.log(this.data.dataArray)
-                        wx.showLoading({
-                            title: '刷新中',
-                        })
-                        setTimeout(function () {
-                            wx.hideLoading()
-                        }, 500);
+                        if(res.data.code===200)
+                        {
+                            this.data.currentPage += 1;
+                            var redata = res.data.data
+                            this.data.dataArray = []
+                            this.data.dataArray.push(redata)
+                            this.setData({
+                                dataArray: this.data.dataArray,
+                                state: false
+                            });
+                            // console.log(this.data.dataArray)
+                            wx.showToast({
+                                title: '刷新成功',
+                            })
+                        }
+                        else{
+                            console.log(res.data.msg)
+                          wx.showToast({
+                            title: res.data.msg,
+                            icon:"error",
+                            duration:500
+                          })
+                        }                    
                     },
                     fail: (err) => {
                         // console.log(err)
@@ -99,9 +118,6 @@ Component({
                             title: '刷新失败',
                             icon: 'error',
                         })
-                        setTimeout(function () {
-                            wx.hideLoading()
-                        }, 500);
                     },
                     method: "GET",
                 })

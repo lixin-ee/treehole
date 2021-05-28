@@ -13,9 +13,8 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
-
 var myService=function(p){
-  var baseUrl="http://124.70.1.254:3000/mock/11/"
+  var baseUrl="http://127.0.0.1:8081/"
   wx.request({
     url: baseUrl+p.url,
     success:p.success,
@@ -23,6 +22,7 @@ var myService=function(p){
     method:p.method,
     data:p.data,
     header:{wxtoken:getApp().globalData.wxt},
+    complete:p.complete
   })
 }
 

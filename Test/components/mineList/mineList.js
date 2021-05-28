@@ -114,8 +114,9 @@ Component({
         ready: function () {
             if (this.data.swipesummaryType === "problems") {
                 myService({
-                    url: "problem/myProblems",
+                    url: "problem/myProblems"+"?pageNum=1",
                     success: (res) => {
+                        console.log("mincheng",res)
                         this.setData({
                             swipesummaryList: res.data.data,
                             state: false
@@ -135,6 +136,7 @@ Component({
 
                     },
                     fail: (err) => {
+                        console.log("fail",err)
                         wx.showToast({
                             title: '加载失败',
                             icon: 'error',
@@ -149,8 +151,9 @@ Component({
             else
             {
                 myService({
-                    url: "answer/myAnswers",
+                    url: "answer/myAnswers"+"?pageNum=1",
                     success: (res) => {
+                        console.log("min2",res)
                         this.setData({
                             swipesummaryList: res.data.data,
                             state: false
@@ -201,9 +204,10 @@ Component({
             myService({
                 url: "problem",
                 success: (res) => {
-                    data: problemIds
+                    console.log(min3,res)
                     console.log("删除问题", res)
                 },
+                data: problemIds,
                 fail: (err) => {
                     wx.showToast({
                         title: '删除问题失败',
@@ -228,10 +232,11 @@ Component({
                 myService({
                     url: "answer",
                     success: (res) => {
-                        data: {
-                            answerIds: answerIds
-                        }
+                        console.log(res)
                         console.log("删除回答", res)
+                    },
+                    data: {
+                        answerIds: answerIds
                     },
                     fail: (err) => {
                         wx.showToast({

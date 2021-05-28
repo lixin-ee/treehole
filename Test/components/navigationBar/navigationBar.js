@@ -40,7 +40,7 @@ Component({
                 url: "tag/all",
                 success: (res) => {
                     this.setData({
-                        "navData.navArray": res.data
+                        "navData.navArray": res.data.data
                     })
                 },
                 fail: (err) => {
@@ -58,7 +58,7 @@ Component({
         },
 
         ready: function () {
-            var current = this.selectComponent(".hometab" +this.data.navData.navArray['0'].tagId+ ' .homelist')
+            var current = this.selectComponent(".hometab" +this.data.navData.navArray[0].tagId+ ' .homelist')
             // console.log(current)
             current.onRefresh()
             // console.log("'ready' in navigationBar2")

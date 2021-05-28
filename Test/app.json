@@ -1,34 +1,36 @@
 {
-  "pages":[
+  "pages": [
+    "pages/login/login",
     "pages/home/home",
     "pages/mine/mine",
     "pages/details/details",
     "pages/logs/logs",
     "pages/editor/editor",
     "pages/search/search"
+ 
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "TreeHole",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
-  "usingComponents": {
+  "usingComponents": {},
+  "tabBar": {
+    "custom": true,
+    "color": "#0000ff",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "问答"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
   },
-    "tabBar": {
-      "custom": true,
-     "color": "#0000ff",
-     "selectedColor": "#11cd6e",
-     "borderStyle": "black" ,
-     "list": [{
-       "pagePath": "pages/home/home",
-       "text": "问答"
-     },
-     {
-       "pagePath": "pages/mine/mine",
-       "text": "我的"
-     }
-     ]
-   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,7 @@
+<!--pages/login.wxml-->
+<view style="height:100vh" class="container">
+<view>
+  <view class="title">树洞匿名社区</view>
+  <button class="loginBtn" bindtap="login" >进入树洞</button>
+</view>
+</view>

@@ -7,80 +7,25 @@ Page({
      * 页面的初始数据
      */
     data: {
-        thisProblemId:0,
-        myProblem: {
-            id: 1,
-            author: "author",
-            problemId:234,
-            type: "problem",
-            workType:"",
-            detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
-            title: "这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题",
-            updatetime: "2021-5-22 10:12",
-            tags: [{
-                tagName: "标签1",
-                tagId:234,
-            }, {
-                tagName: "标签2",
-                tagId:345,
-            }, {
-                tagName: "标签3",
-                tagId:654,
-            },{
-                tagName: "标签4",
-                tagId:21234,
-            }, {
-                tagName: "标签5",
-                tagId:235344,
-            }, {
-                tagName: "标签6",
-                tagId:234,
-            },{
-                tagName: "标签7",
-                tagId:234,
-            }, {
-                tagName: "标签8",
-                tagId:234,
-            }, {
-                tagName: "标签9",
-                tagId:234,
-            }],
-            avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-        },
-        myAnswerList: [{
-                id: 1,
-                anthor: "author",
-                type: "answer",
-                workType:"",
-                detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
-                updatetime: "2021-5-22 10:12",
-                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-            },
-            {
-                id: 2,
-                anthor: "author",
-                type: "answer",
-                workType:"",
-                detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
-                updatetime: "2021-5-22 10:12",
-                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-            },
-        ],
+     myProblem:{},
+     problemId:undefined
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let thisProblemId=options.problemId
+        this.data.problemId=options.problemId
+        console.log(this.data.problemId)
         myService({
-            url: "problem/" + this.data.thisProblemId ,
+            url: "problem/" +this.data.problemId ,
             success: (res) => {
+                console.log(res)
                 this.setData({
                     myProblem:res.data.data,
-                    'myProblem.problemId':thisProblemId
+                    problemId:options.problemId
                 });
-                this.data.myProblem.type="problem";
+                this.selectComponent
                 wx.showLoading({
                     title: '加载中',
                 })
@@ -101,8 +46,9 @@ Page({
             method: "GET",
         }),
         myService({
-            url: "answer/problem/" + this.data.thisProblemId ,
+            url: "answer/problem/" + this.data.problemId+"?pageNum=1" ,
             success: (res) => {
+                console.log(res)
                 this.setData({
                     myAnswerList:res.data.data
                 });
@@ -115,7 +61,7 @@ Page({
 
             },
             fail: (err) => {
-                // console.log(err)
+                 console.log(err)
                 wx.showToast({
                     title: '加载失败',
                     icon: 'error',

@@ -581,7 +581,7 @@ Page({
       success: (res) => {
         // console.log(res.data)
         this.setData({
-          "tabData": res.data,
+          "tabData": res.data.data,
           problemId: option.problemId
         })
       },

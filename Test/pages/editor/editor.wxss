@@ -16,7 +16,6 @@
   line-height: 1.5;
   overflow: auto;
   padding: 10px 10px 20px 10px;
-  border: 1px solid #008cff;
 }
 
 .ql-active {

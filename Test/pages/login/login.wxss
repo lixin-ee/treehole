@@ -1,0 +1,14 @@
+/* pages/login.wxss */
+.loginBtn
+{
+  color:black;
+  background-color: rgb(105, 218, 105);
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  border-radius: 10rpx;
+  text-align: center;
+}
+.title{
+  color:black;
+  font-size: 100rpx;
+  margin-bottom: 100px;
+}
