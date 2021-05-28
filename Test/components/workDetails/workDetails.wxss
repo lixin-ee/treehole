@@ -31,14 +31,13 @@
   margin-left: 30rpx;
 }
 .chip {
-  /* background-color: hotpink; */
-  background-color: rgb(159, 231, 253);
+  background-color: hotpink;
   display: inline-block;
   border-radius: 30rpx;
   font-size: 20rpx;
   height: 30rpx;
   padding: 3rpx 10rpx;
-  color: black;
+  color:whitesmoke;
   margin-left: 20rpx;
   vertical-align: 13rpx;
 }

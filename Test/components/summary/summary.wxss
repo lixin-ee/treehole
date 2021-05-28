@@ -52,14 +52,14 @@
 }
 
 .chip {
-    background-color: rgb(159, 231, 253);
+    background-color:royalblue;
     display: inline-block;
     border-radius: 30rpx;
     font-size: 20rpx;
     font-weight: 250;
     height: 30rpx;
     padding: 3rpx 10rpx;
-    color: rgb(0, 0, 0);
+    color:whitesmoke;
     margin-left: 20rpx;
     vertical-align: 30rpx;
 }

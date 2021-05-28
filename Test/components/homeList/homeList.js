@@ -40,9 +40,6 @@ Component({
 
     methods: {
         onBottom(e) {
-            // console(this.data)
-            // console("'onBottom' in homelist")
-            // console.log("this is 'on bottom' in homelist")
             this.data.currentPage += 1;
             myService({
                 url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
@@ -77,42 +74,37 @@ Component({
         },
 
         onRefresh(e) {
-            // console.log(this.data)
-            // console.log("'onRefresh' in homelist")
-            myService({
-                url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
-                success: (res) => {
-                    this.data.currentPage += 1;
-                    // console.log(res)
-                    // console.log("in 'onRefresh' in homelist")
-                    var redata = res.data.data
-                    this.data.dataArray = []
-                    this.data.dataArray.push(redata)
-                    this.setData({
-                        dataArray: this.data.dataArray,
-                        state: false
-                    });
-                    // console.log(this.data.dataArray)
-                    wx.showLoading({
-                        title: '刷新中',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
-                },
-                fail: (err) => {
-                    // console.log(err)
-                    wx.showToast({
-                        title: '刷新失败',
-                        icon: 'error',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
-                },
-                method: "GET",
-            })
-
+                myService({
+                    url: "problem/tag/" + this.data.tagId + "?pageNum=" + (this.data.currentPage + 2),
+                    success: (res) => {
+                        this.data.currentPage += 1;
+                        var redata = res.data.data
+                        this.data.dataArray = []
+                        this.data.dataArray.push(redata)
+                        this.setData({
+                            dataArray: this.data.dataArray,
+                            state: false
+                        });
+                        // console.log(this.data.dataArray)
+                        wx.showLoading({
+                            title: '刷新中',
+                        })
+                        setTimeout(function () {
+                            wx.hideLoading()
+                        }, 500);
+                    },
+                    fail: (err) => {
+                        // console.log(err)
+                        wx.showToast({
+                            title: '刷新失败',
+                            icon: 'error',
+                        })
+                        setTimeout(function () {
+                            wx.hideLoading()
+                        }, 500);
+                    },
+                    method: "GET",
+                })
         },
 
     },

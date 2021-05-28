@@ -25,9 +25,9 @@ Component({
           value: e.detail,
         });
       },
+
       onClick() {
-        // Toast('搜索' + this.data.value);
-        console.log(this.data.value)
+      console.log(this.data.value)
         wx.navigateTo({
           url: '/pages/search/search?key='+this.data.value,
         })

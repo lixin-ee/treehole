@@ -4,15 +4,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    searchKey2: {
+      type: String,
+      value: "",
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    value: '',
-    searchKey: '',
+    value:"",
   },
 
 
@@ -25,19 +27,18 @@ Component({
         value: e.detail,
       });
     },
+
     onClick() {
-      // Toast('搜索' + this.data.value);
-      // console.log(this.data.value)
-      // wx.navigateBack({
-      //   delta: 0,
-      // })
-      // wx.navigateTo({
-      //   url: '/pages/search/search?key='+this.data.value,
-      // })
-      this.data.searchKey = this.data.value;
-      console.log(this.data.searchKey)
+      this.data.searchKey2 = this.data.value;
+      console.log(this.data.searchKey2)
+      console.log("in searchBar2")
       this.setData({
-        value:'',
+        value: '',
+      })
+      wx.navigateBack({
+      })
+      wx.navigateTo({
+        url: '/pages/search/search?key='+this.data.searchKey2,
       })
     },
   }

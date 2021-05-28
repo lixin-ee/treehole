@@ -101,7 +101,7 @@ Page({
             method: "GET",
         }),
         myService({
-            url: "answer/" + this.data.thisProblemId ,
+            url: "answer/problem/" + this.data.thisProblemId ,
             success: (res) => {
                 this.setData({
                     myAnswerList:res.data.data

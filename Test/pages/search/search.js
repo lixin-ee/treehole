@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        searchKey:"tag1"
+        searchKey:"tag1",
     },
 
     /**
@@ -14,6 +14,9 @@ Page({
     onLoad: function (options) {
         this.searchKey=options.key
         console.log(this.searchKey+" in search")
+        var current = this.selectComponent(' .homelist')
+            if (current.data.currentPage === -1)
+                current.onRefresh()
     },
 
     /**

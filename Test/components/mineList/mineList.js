@@ -159,7 +159,6 @@ Component({
                         {
                             this.setData({
                                 [`swipesummaryList[${i}].workType`]:"editAnswer",
-                                [`swipesummaryList[${i}].answerId`]:i,
                             })
                         }
                         wx.showLoading({
