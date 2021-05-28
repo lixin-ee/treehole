@@ -14,19 +14,23 @@ Page({
     isIOS: false,
     textInput: "",
 
+    thisProblemId: 0,
+    thisAnswerId: 0,
+    thisWorkType: "",
     //用于修改时，获得原本的信息
-    sumData:[{
+    sumData: [{
 
     }],
 
     tabData: [{
-      tagName: "Q",
-      tagId: "1234",
-    }, 
-    {
-      tagName:"B",
-      tagId:"145",
-    }],
+        tagName: "Q",
+        tagId: "1234",
+      },
+      {
+        tagName: "B",
+        tagId: "145",
+      }
+    ],
 
     show: false,
 
@@ -41,7 +45,7 @@ Page({
   },
 
   onClickRight(e) {
-    if (!this.data.titleReadOnly) { // newProblem
+    if (this.data.thisWorkType == "newProblem") { // newProblem
       console.log("尝试发布一个新问题")
       if (this.data.problemTitle == "") {
         wx.showToast({
@@ -87,7 +91,7 @@ Page({
         }
       })
 
-    } else {
+    } else if (this.data.thisWorkType == "newAnswer") {
       console.log("尝试发布一个新回答", this.data.textInput)
       if (this.data.textInput === "") {
         wx.showToast({
@@ -98,13 +102,56 @@ Page({
         return
       }
       console.log("新回答发布成功\nanswer: ", this.data.textInput)
+    } else if (this.data.thisWorkType == "editProblem") {
+      const that = this
+      console.log(this.data)
+      myService({
+        url: "problem/" + this.data.thisProblemId,
+        data: {
+          title: this.data.problemTitle,
+          content: this.data.textInput,
+          //TO-DO 如何获得富文本
+          detail: this.data.content,
+          isAnonymous: this.data.isAnonymous,
+          tagIds: this.data.result
+        },
+        method: "PUT",
+        success: function (res) {
+          wx.navigateBack()
+          wx.showToast({
+            title: '问题修改成功！',
+            duration: 1500,
+          })
+        },
+        fail: function (err) {
+          console.log("问题修改失败")
+          console.log(err)
+        }
+      })
+    } else if (this.data.thisWorkType == "editAnswer") {
+      const that = this
+      myService({
+        url: "answer/" + this.data.thisAnswerId,
+        data: {
+          content: this.data.textInput,
+          //TO-DO 如何获得富文本
+          detail: this.data.content,
+          isAnonymous: this.data.isAnonymous,
+        },
+        method: "PUT",
+        success: function (res) {
+          wx.navigateBack()
+          wx.showToast({
+            title: '回答修改成功！',
+            duration: 1500,
+          })
+        },
+        fail: function (err) {
+          console.log("回答修改失败")
+          console.log(err)
+        }
+      })
     }
-
-
-
-
-
-
   },
 
   inputTitle(e) {
@@ -150,34 +197,50 @@ Page({
   },
 
   onLoad(option) {
-    console.log(option)
-    console.log("options-------")
-      //用于获取所有标签，以供选择
-      myService({
-        url: "tag/all",
-        success: (res) => {
-          // console.log(res.data)
-          this.setData({
-           "tabData": res.data
-          })
-        },
-        fail: (err) => {
-          // console.log(err)
-        },
-        method: "GET",
-      })
+    //用于获取所有标签，以供选择
+    myService({
+      url: "tag/all",
+      success: (res) => {
+        this.setData({
+          "tabData": res.data
+        })
+      },
+      fail: (err) => {
+        // console.log(err)
+      },
+      method: "GET",
+    })
 
 
     //界面设置
-    var temptype = (option.type === "problem" ? "newProblem" : "newAnswer");
-    //temptype = "newAnswer"
-    console.log(temptype)
+    //类型对应：
+    //新问题newProblem，新回答newAnswer，编辑问题editProblem,编辑回答editAnswer
+
+    if (option.type === "problem") {
+      var temptype = "newProblem"
+      this.data.thisWorkType = "newProblem"
+    } else if (option.type === "answer") {
+      var temptype = "newAnswer"
+      this.data.thisWorkType = "newAnswer"
+    } else if (option.type === "editProblem") {
+      var temptype = "editProblem"
+      this.data.thisProblemId = option.problemId
+      this.data.thisWorkType = "editProblem"
+    } else if (option.type === "editAnswer") {
+      var temptype = "editAnswer"
+      this.data.thisWorkType = "editAnswer"
+      this.data.thisProblemId = option.problemId
+      this.data.thisAnswerId = option.answerId
+    }
+    //发布新问题
     if (temptype == "newProblem") {
       this.setData({
         pageTitle: "发布新问题",
         titleReadOnly: false
       })
-    } else {
+    }
+    //发布新回答
+    else if (temptype == "newAnswer") {
       this.setData({
         pageTitle: "写新回答",
         titleReadOnly: true,
@@ -185,6 +248,84 @@ Page({
         placeholder: "请输入您的回答"
       })
     }
+    //编辑问题
+    else if (temptype == "editProblem") {
+      myService({
+        url: "problem/" + this.data.thisProblemId,
+        success: (res) => {
+          console.log(res)
+          console.log("-------");
+          const that = res
+          this.setData({
+            problemTitle: res.data.data.title,
+            titleReadOnly: false,
+          })
+          wx.createSelectorQuery().select('#editor').context(function (res) {
+            that.editorCtx = res.context
+            console.log(that)
+            that.editorCtx.setContents({
+              html: that.data.data.detail,
+              success: function () {}
+            })
+          }).exec()
+          wx.showLoading({
+            title: '加载中',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 500);
+        },
+        fail: (err) => {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'error',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 500);
+        },
+        method: "GET",
+      })
+    }
+    //编辑回答
+    // else if (temptype == "editAnswer") {
+    //   myService({
+    //     url: "answer/" + this.data.thisProblemId,
+    //     success: (res) => {
+    //       console.log(res)
+    //       console.log("-------");
+    //       const that = res
+    //       this.setData({
+    //         problemTitle:res.data.data.title,
+    //         titleReadOnly:false,
+    //       })
+    //       wx.createSelectorQuery().select('#editor').context(function (res) {
+    //           that.editorCtx = res.context
+    //           console.log(that)
+    //           that.editorCtx.setContents({
+    //               html: that.data.data.detail,
+    //               success: function () {}
+    //           })
+    //       }).exec()
+    //       wx.showLoading({
+    //         title: '加载中',
+    //       })
+    //       setTimeout(function () {
+    //         wx.hideLoading()
+    //       }, 500);
+    //     },
+    //     fail: (err) => {
+    //       wx.showToast({
+    //         title: '加载失败',
+    //         icon: 'error',
+    //       })
+    //       setTimeout(function () {
+    //         wx.hideLoading()
+    //       }, 500);
+    //     },
+    //     method: "GET",
+    //   })
+    // }
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({

@@ -20,6 +20,7 @@ Component({
             type: Object,
             value: [{
                     id: 1,
+                    workType:"",
                     title: "标题一",
                     problemId: 106438,
                     updateTime: "2021-5-22 10:12",
@@ -66,6 +67,7 @@ Component({
                 },
                 {
                     id: 2,
+                    workType:"",
                     title: "标题一",
                     problemId: 106438,
                     updateTime: "2021-5-22 10:12",
@@ -118,8 +120,12 @@ Component({
                             swipesummaryList: res.data.data,
                             state: false
                         });
-                        // console.log(this.data.swipesummaryList)
-                        // console.log("problems-----------")
+                        for(var i=0;i<this.data.swipesummaryList.length;i++)
+                        {
+                            this.setData({
+                                [`swipesummaryList[${i}].workType`]:"editProblem",
+                            })
+                        }
                         wx.showLoading({
                             title: '加载中',
                         })
@@ -129,7 +135,6 @@ Component({
 
                     },
                     fail: (err) => {
-                        // console.log(err)
                         wx.showToast({
                             title: '加载失败',
                             icon: 'error',
@@ -146,13 +151,17 @@ Component({
                 myService({
                     url: "answer/myAnswers",
                     success: (res) => {
-                        // console.log(res.data.data)
                         this.setData({
                             swipesummaryList: res.data.data,
                             state: false
                         });
-                        // console.log(this.data.swipesummaryList)
-                        // console.log("answers------------")
+                        for(var i=0;i<this.data.swipesummaryList.length;i++)
+                        {
+                            this.setData({
+                                [`swipesummaryList[${i}].workType`]:"editAnswer",
+                                [`swipesummaryList[${i}].answerId`]:i,
+                            })
+                        }
                         wx.showLoading({
                             title: '加载中',
                         })
@@ -162,7 +171,6 @@ Component({
 
                     },
                     fail: (err) => {
-                        // console.log(err)
                         wx.showToast({
                             title: '加载失败',
                             icon: 'error',

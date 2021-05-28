@@ -4,11 +4,10 @@
 <!-- 即在home页面中蓝色框圈出的部分，每个部分为一个summary -->
 <!-- 一个homeList中将会填充多个summary -->
 
-<view >
+<view class="Block">
 <van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}" async-close
   bind:close="onClose">
-
-    <van-cell-group  bindtap="clickSwipesummary" class="Block">
+    <van-cell-group  bindtap="clickSwipesummary">
 
         <view class="Title">
             {{sumData.title}}

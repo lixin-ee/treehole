@@ -3,7 +3,7 @@
 /* .表示类选择器，#表示id选择器 */
 .swipesummary {
   margin: 5rpx 0;
-  border: 5rpx solid grey;
+  /* border: 5rpx solid grey; */
   width: 95%;
  
   display: block;

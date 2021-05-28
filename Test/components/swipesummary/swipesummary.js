@@ -10,6 +10,7 @@ Component({
     sumData: {
       type: Object,
       value: {
+        workType:"problem",
         id: 0,
         title: "biaoti0",
         problemId: 123,
@@ -73,9 +74,11 @@ Component({
     },
     toEdit(e)
     {
-        // console.log(e)
+      console.log(e)
+      console.log(this.data.sumData)
+      console.log("----------")
        wx.navigateTo({
-         url:"/pages/editor/editor?problemId="+this.data.sumData.problemId,
+         url:"/pages/editor/editor?problemId="+this.data.sumData.problemId+"&type="+this.data.sumData.workType+"&answerId="+this.data.sumData.answerId,
        })
     },
     toDelete:function(e) {

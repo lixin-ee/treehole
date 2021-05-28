@@ -9,7 +9,6 @@
     display: block;
 }
 
-
 .homeout{
     display: flex;
     justify-content: center;
@@ -19,15 +18,3 @@
 :host {
     display: block;
 } 
-
-
-
-.homeout{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-:host {
-    display: block;
-}

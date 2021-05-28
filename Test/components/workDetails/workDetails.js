@@ -14,6 +14,7 @@ Component({
         workData: {
             type: Object,
             value: {
+                problemId: 123,
                 author: "author",
                 anthor: "anthor",
                 detail: "111",
@@ -43,7 +44,6 @@ Component({
 
     },
     lifetimes: {
-
     },
 
     /**
@@ -52,13 +52,11 @@ Component({
     methods: {
         clickAddAnswer() {
             wx.navigateTo({
-                url: "/pages/editor/editor?type=" + this.data.workData.title
+                url: "/pages/editor/editor?type=" + "answer"
             })
         },
 
         onEditorReady() {
-            // console.log(this.data.workData)
-            // console.log("------------")
             const that = this
             this.createSelectorQuery().select('#editor1').context(function (res) {
                 that.editorCtx = res.context

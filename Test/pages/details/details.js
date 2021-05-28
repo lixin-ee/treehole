@@ -13,6 +13,7 @@ Page({
             author: "author",
             problemId:234,
             type: "problem",
+            workType:"",
             detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
             title: "这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题这是大标题",
             updatetime: "2021-5-22 10:12",
@@ -50,6 +51,7 @@ Page({
                 id: 1,
                 anthor: "author",
                 type: "answer",
+                workType:"",
                 detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
                 updatetime: "2021-5-22 10:12",
                 avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
@@ -58,6 +60,7 @@ Page({
                 id: 2,
                 anthor: "author",
                 type: "answer",
+                workType:"",
                 detail: "这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content这是content",
                 updatetime: "2021-5-22 10:12",
                 avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
@@ -74,7 +77,7 @@ Page({
             url: "problem/" + this.data.thisProblemId ,
             success: (res) => {
                 this.setData({
-                    myProblem:res.data.data
+                    myProblem:res.data.data,
                 });
                 this.data.myProblem.type="problem";
                 wx.showLoading({
