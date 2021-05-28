@@ -50,10 +50,11 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        
         clickAddAnswer() {
             console.log(this.data.workData)
             wx.navigateTo({
-                url: "/pages/editor/editor?type=" + this.data.workData.title + "&problemId=" + this.data.workData.problemId
+                url: "/pages/editor/editor?type=answer&title=" + this.data.workData.title + "&problemId=" + this.data.workData.problemId
             })
         },
 
