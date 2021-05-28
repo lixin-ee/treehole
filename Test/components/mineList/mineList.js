@@ -188,24 +188,63 @@ Component({
      * 组件的方法列表
      */
   methods:{
-    OnViewText(e){
+    OnDelete(e) {
         console.log(e.detail);
-        var problemid=0;
-        for(var i=0;i<this.data.swipesummaryList.length;i++)
-        {
-            if(e.detail==this.data.swipesummaryList[i].problemId)
-            {
-                problemid=i;
-                i=this.data.swipesummaryList.length;
+        var problemid = 0;
+        for (var i = 0; i < this.data.swipesummaryList.length; i++) {
+            if (e.detail == this.data.swipesummaryList[i].problemId) {
+                problemid = i;
+                break;
             }
         };
-        this.data.swipesummaryList.splice(problemid,1);
-        
+        var problemids = [e.detail];
+          if (this.data.swipesummaryType === "problems") {
+            myService({
+                url: "problem",
+                success: (res) => {
+                    data: problemids
+                    console.log("删除问题",res)
+                },
+                fail: (err) => {
+                    wx.showToast({
+                        title: '删除问题失败',
+                        icon: 'error',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 1000);
+                    console.log(err)
+                },
+                method: "DELETE",
+            })
+        }
+         else {
+            myService({
+                url: "answer",
+                success: (res) => {
+                    data:{
+                       answerIds: problemids
+                    } 
+                    console.log("删除回答",res)
+                },
+                fail: (err) => {
+                    wx.showToast({
+                        title: '删除回答失败',
+                        icon: 'error',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 1000);
+                    console.log(err)
+                },
+                method: "DELETE",
+            })
+        }
+        this.data.swipesummaryList.splice(problemid, 1);
         this.setData({
-            swipesummaryList:this.data.swipesummaryList,
+            swipesummaryList: this.data.swipesummaryList,
         })
-        
-      },
+    },
       onBottom(e)
       {
         //   console.log(e);

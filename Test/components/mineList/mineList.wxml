@@ -8,7 +8,7 @@
     bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}"
     refresher-threshold="100">
     <view class="homeout">
-        <swipesummary bind:myEvent="OnViewText" class="swipesummary" wx:for="{{swipesummaryList}}" wx:key="id" sumData="{{item}}">
+        <swipesummary bind:myEvent="OnDelete" class="swipesummary" wx:for="{{swipesummaryList}}" wx:key="id" sumData="{{item}}">
         </swipesummary>
     </view>
 </scroll-view>
