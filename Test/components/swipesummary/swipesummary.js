@@ -11,7 +11,7 @@ Component({
       type: Object,
       value: {
         workType:"problem",
-        id: 0,
+        answerId: 0,
         title: "biaoti0",
         problemId: 123,
         updateTime: "2021-5-22 10:12",
@@ -86,7 +86,7 @@ Component({
         success:(res)=> {
           if (res.confirm) {
             console.log('用户点击确定')
-            this.triggerEvent('myEvent',this.data.sumData.problemId)
+            this.triggerEvent('myEvent',{sumProblemId:this.data.sumData.problemId,sumAnswerId:this.data.sumData.answerId,sumWorkType:this.data.sumData.workType})
           } else if (res.cancel) {
             console.log('用户点击取消')
           }

@@ -190,20 +190,20 @@ Component({
   methods:{
     OnDelete(e) {
         console.log(e.detail);
-        var problemid = 0;
-        for (var i = 0; i < this.data.swipesummaryList.length; i++) {
-            if (e.detail == this.data.swipesummaryList[i].problemId) {
-                problemid = i;
-                break;
-            }
-        };
-        var problemids = [e.detail];
-          if (this.data.swipesummaryType === "problems") {
+        var index = 0;
+        if (this.data.swipesummaryType === "problems") {
+            for (var i = 0; i < this.data.swipesummaryList.length; i++) {
+                if (e.detail.sumProblemId == this.data.swipesummaryList[i].problemId) {
+                    index = i;
+                    break;
+                }
+            };
+            var problemIds = [e.detail.sumProblemId];
             myService({
                 url: "problem",
                 success: (res) => {
-                    data: problemids
-                    console.log("删除问题",res)
+                    data: problemIds
+                    console.log("删除问题", res)
                 },
                 fail: (err) => {
                     wx.showToast({
@@ -217,34 +217,42 @@ Component({
                 },
                 method: "DELETE",
             })
-        }
-         else {
-            myService({
-                url: "answer",
-                success: (res) => {
-                    data:{
-                       answerIds: problemids
-                    } 
-                    console.log("删除回答",res)
-                },
-                fail: (err) => {
-                    wx.showToast({
-                        title: '删除回答失败',
-                        icon: 'error',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 1000);
-                    console.log(err)
-                },
-                method: "DELETE",
+        } else {
+      
+                for (var i = 0; i < this.data.swipesummaryList.length; i++) {
+                    if (e.detail.sumAnswerId == this.data.swipesummaryList[i].answerId) {
+                        index = i;
+                        break;
+                    }
+                };
+                var answerIds = [e.detail.sumAnswerId]
+                myService({
+                    url: "answer",
+                    success: (res) => {
+                        data: {
+                            answerIds: answerIds
+                        }
+                        console.log("删除回答", res)
+                    },
+                    fail: (err) => {
+                        wx.showToast({
+                            title: '删除回答失败',
+                            icon: 'error',
+                        })
+                        setTimeout(function () {
+                            wx.hideLoading()
+                        }, 1000);
+                        console.log(err)
+                    },
+                    method: "DELETE",
+                })
+            }
+            this.data.swipesummaryList.splice(index, 1);
+            this.setData({
+                swipesummaryList: this.data.swipesummaryList,
             })
-        }
-        this.data.swipesummaryList.splice(problemid, 1);
-        this.setData({
-            swipesummaryList: this.data.swipesummaryList,
-        })
-    },
+        },
+    
       onBottom(e)
       {
         //   console.log(e);
