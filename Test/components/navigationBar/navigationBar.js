@@ -44,6 +44,14 @@ Component({
                     })
                 },
                 fail: (err) => {
+                    wx.showToast({
+                        title: '导航栏获取失败',
+                        icon: 'error',
+                    })
+                    setTimeout(function () {
+                        wx.hideLoading()
+                    }, 1000);
+                    console.log(err)
                 },
                 method: "GET",
             })

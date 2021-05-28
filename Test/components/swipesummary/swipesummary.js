@@ -90,7 +90,17 @@ Component({
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
-        }
+        },
+        fail: (err) => {
+          wx.showToast({
+              title: '加载失败',
+              icon: 'error',
+          })
+          setTimeout(function () {
+              wx.hideLoading()
+          }, 1000);
+          console.log(err)
+      },
       })
     },
     onClose:function(e){

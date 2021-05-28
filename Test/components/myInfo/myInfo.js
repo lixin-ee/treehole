@@ -38,8 +38,15 @@ Component({
                     })
                 },
                 fail:(err)=>{
-                    console.log(err)
-                },
+                        wx.showToast({
+                            title: '个人信息加载失败',
+                            icon: 'error',
+                        })
+                        setTimeout(function () {
+                            wx.hideLoading()
+                        }, 1000);
+                        console.log(err)
+                    },
                 method:"GET",
             })
         }

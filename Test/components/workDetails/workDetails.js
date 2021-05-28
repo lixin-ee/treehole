@@ -64,7 +64,17 @@ Component({
                 that.editorCtx = res.context
                 that.editorCtx.setContents({
                     html: that.data.workData.detail,
-                    success: function () {}
+                    success:()=> {},
+                    fail: (err) => {
+                        wx.showToast({
+                            title: '详情初始化失败',
+                            icon: 'error',
+                        })
+                        setTimeout(function () {
+                            wx.hideLoading()
+                        }, 1000);
+                        console.log(err)
+                    },
                 })
 
             }).exec()

@@ -236,7 +236,7 @@ Component({
                     },
                     fail: (err) => {
                         wx.showToast({
-                            title: '删除回答失败',
+                            title: '',
                             icon: 'error',
                         })
                         setTimeout(function () {
