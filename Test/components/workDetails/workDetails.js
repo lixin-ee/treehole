@@ -51,8 +51,9 @@ Component({
      */
     methods: {
         clickAddAnswer() {
+            console.log(this.data.workData)
             wx.navigateTo({
-                url: "/pages/editor/editor?type=" + "answer"
+                url: "/pages/editor/editor?type=" + this.data.workData.title + "&problemId=" + this.data.workData.problemId
             })
         },
 

@@ -74,9 +74,7 @@ Component({
     },
     toEdit(e)
     {
-      console.log(e)
-      console.log(this.data.sumData)
-      console.log("----------")
+        //console.log(e)
        wx.navigateTo({
          url:"/pages/editor/editor?problemId="+this.data.sumData.problemId+"&type="+this.data.sumData.workType+"&answerId="+this.data.sumData.answerId,
        })

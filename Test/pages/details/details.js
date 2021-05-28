@@ -78,6 +78,7 @@ Page({
             success: (res) => {
                 this.setData({
                     myProblem:res.data.data,
+                    'myProblem.problemId':thisProblemId
                 });
                 this.data.myProblem.type="problem";
                 wx.showLoading({
