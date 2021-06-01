@@ -16,5 +16,9 @@ App({
   globalData: {
     userInfo: null,
     wxt:"jfoefoejfoej",
+    pageSize:10,
+    myInfoState:false,
+    myProblemState:false,
+    myAnserState:false,
   }
 })

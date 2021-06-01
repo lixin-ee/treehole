@@ -6,7 +6,7 @@
     /* border: 5rpx solid #ee0000; */
 }
 
-.answers
+.answer
 {
     margin: 5rpx 0;
     /* border: 5rpx solid #0000ff; */

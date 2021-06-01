@@ -7,75 +7,68 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        workId:{
-            type:Number,
-        },
         workType: {
             type: String,
-            value: "problem",
         },
         workData: {
             type: Object,
-            value: {
-                problemId: 123,
-                author: "author",
-                detail: "111",
-                title: "How to complete miniprogram",
-                updateTime: "2021-5-22 10:12",
-                tags: [{
-                    tagName: "标签1",
-                    tagId: 345
-                }, {
-                    tagName: "标签哈哈哈",
-                    tagId: 567,
-                }, {
-                    tagName: "标签2",
-                    tagId: 54564
-                }],
-                avatar: "https://img.yzcdn.cn/vant/cat.jpeg",
-            }
         },
 
     },
-
-    /**
-     * 组件的初始数据
-     */
     data: {
-
-
+        editReady:false,
+        dataReady:false
     },
     lifetimes: {
     },
-
-    /**
-     * 组件的方法列表
-     */
     methods: {
-        refreshEditor()
-        {
-            this.editorCtx.setContents({
-                html: that.data.workData.detail,
-                success:()=> {console.log("fefefe",that.data.workData.detail)},
-                fail: (err) => {
-                    console.log(that.data.workData)
-                    console.log(err)
-                },
-            })
+        refresheditor(){
+            this.data.dataReady=true;
+            if(!this.data.editReady)
+            {
+                console.log("edit not Ready")
+                return
+            }
+            else  {
+                this.editorCtx.setContents({
+                    html: this.data.workData.detail,
+                    success:()=> {console.log("edit before data",this.data.workData.detail)},
+                    fail: (err) => {
+                        console.log(this.data.workData)
+                        console.log(err)
+                    },
+                })
+            } 
         },
         clickAddAnswer() {
             console.log(this.data.workData)
             wx.navigateTo({
-                url: "/pages/editor/editor?type=answer&title=" + this.data.workData.title + "&problemId=" + this.data.workId
+                url: "/pages/editor/editor?type=answer&title=" + this.data.workData.title + "&problemId=" + this.data.workData.problemId
             })
         },
 
         onEditorReady() {
-            const that = this
-            this.createSelectorQuery().select('#editor1').context(function (res) {
-                console.log(res)
-                that.editorCtx = res.context
-            }).exec()
+                 console.log("editorready")
+                this.createSelectorQuery().select('#editor1').context( (res)=>{
+                    console.log(res)
+                    this.editorCtx = res.context
+                    this.data.editReady=true; 
+                    if(this.data.dataReady)
+                    {
+                        this.editorCtx.setContents({
+                            html: this.data.workData.detail,
+                            success:()=> {console.log("data before edit",this.data.workData.detail)},
+                            fail: (err) => {
+                                console.log(this.data.workData)
+                                console.log(err)
+                            },
+                        })
+                    }
+                    else{
+                        console.log("data not ready")
+                    }
+                   
+                }).exec()
         },
     },
 })

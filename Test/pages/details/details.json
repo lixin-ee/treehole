@@ -1,4 +1,6 @@
 {
+  "enablePullDownRefresh":true,
+  "onReachBottomDistance":10,
   "usingComponents": {
     "workDetails":"/components/workDetails/workDetails"
   }

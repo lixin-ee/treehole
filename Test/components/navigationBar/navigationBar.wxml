@@ -8,7 +8,7 @@
 
 <!-- TO-DO可以设置标题选中态颜色 -->
 <!-- ellipsis 用于设置是否隐藏标题内容 -->
-<van-tabs  swipeable color="hotpink" ellipsis="{{true}}" swipeable animated bind:change="OnChange">
+<van-tabs  swipeable color="hotpink"   bind:change="OnChange">
   <van-tab  class="hometab{{item.tagId}} tab" title="{{item.tagName}}" wx:for="{{navData.navArray}}" wx:key="tagId">
     <homeList tagId="{{item.tagId}}" scrollclass="homeScroll" class="homelist">
     </homeList>

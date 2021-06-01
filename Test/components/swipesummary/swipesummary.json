@@ -2,6 +2,5 @@
   "component": true,
   "usingComponents": {
     "van-swipe-cell": "@vant/weapp/swipe-cell/index"
-    
   }
 }

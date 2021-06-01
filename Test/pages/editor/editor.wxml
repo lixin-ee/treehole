@@ -3,41 +3,33 @@
   <!-- 顶部 导航栏 -->
   <van-nav-bar custom-style="padding-top: 0px;" safe-area-inset-top="{{false}}" left-text="返回" right-text="发布"
     left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" title="{{pageTitle}}" />
-  <van-field value="{{ problemTitle }}" label="问题标题" placeholder="请输入问题标题" required="{{true}}"
-    readonly="{{titleReadOnly}}" clearable="{{true}}" bind:input="inputTitle" />
+  <van-field value="{{ problemTitle }}" label="问题标题" placeholder="请输入问题标题" required="{{true}}" bind:change="{{onTitleChange}}" readonly="{{titleReadOnly}}" clearable="{{true}}" bind:input="inputTitle" />
 
   <!-- 高级设置 按钮 -->
   <van-cell title="高级设置" is-link bind:click="showDialog" />
 
   <!-- 高级设置 按钮 对话框 -->
-  <van-dialog use-slot confirm-button-open-type="clickConfirm" show-cancel-button="clickCancel" title="设置"
-    show="{{ show }}" bind:close="onClose">
+  <van-dialog use-slot show-cancel-button bind:confirm="onConfirm" bind:cancel="onCancel" title="设置" show="{{ show }}">
     <view class="container">
       <view>
         <!-- 标签选择 复选框 -->
-        <scroll-view scroll-y="true" class="tabChoose" style="height:600rpx">
-          <van-checkbox-group  value="{{ result }}" bind:change="onChange" max="{{ 10 }}"
-            wx:for="{{tabData}}" wx:key="tagId">
+        <scroll-view hidden="{{thisWorkType==='newAnswer'||thisWorkType==='editAnswer'}}" scroll-y="true"
+          class="tabChoose" style="height:600rpx">
+          <van-checkbox-group value="{{tempresult }}" bind:change="onChange" max="{{ 10 }}" wx:for="{{tabData}}"
+            wx:key="tagId">
             <van-checkbox class="tabChoose2" icon-size="25px" name="{{item.tagId}}">{{item.tagName}}</van-checkbox>
           </van-checkbox-group>
           <!-- 分割线 -->
           <van-divider hairline borderColor="#000000" />
-          <!-- 是否匿名 复选框 -->
-          <van-checkbox icon-size="25px" name="{{AnonChoice}}" value="{{ anon }}" bind:change="onChange2">
-            是否匿名
-          </van-checkbox>
         </scroll-view>
+        <!-- 是否匿名 复选框 -->
+        <van-checkbox icon-size="25px" name="{{AnonChoice}}" value="{{ tempanon }}" bind:change="onChange2">
+          是否匿名
+        </van-checkbox>
       </view>
     </view>
   </van-dialog>
-
-
-
-
-
-
-
-  <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange"
+  <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" show-img-size show-img-toolbar show-img-resize
     bindready="onEditorReady" style="bottom:{{keyboardHeight}}px" bindinput="inputEditor" read-only="{{readOnly}}">
   </editor>
 

@@ -6,9 +6,9 @@
 <!-- 具体可查阅 -->
 <scroll-view scroll-top="{{scrollTop}}" class="scrollclass" scroll-y="true" bindrefresherrefresh="onRefresh"
     bindscrolltolower="onBottom" refresher-enabled refresher-background="white" refresher-triggered="{{state}}"
-    refresher-threshold="100">
-    <view class="homeout">
-        <swipesummary bind:myEvent="OnDelete" class="swipesummary" wx:for="{{swipesummaryList}}" wx:key="id" sumData="{{item}}">
+    refresher-threshold="100"  lower-threshold="10">
+    <view class="homeout" wx:for="{{dataArray}}" wx:key="id" wx:for-item="item1">
+        <swipesummary workType="{{swipesummaryType}}"  bind:myEvent="OnDelete"  class="swipesummary" wx:for="{{item1}}" wx:key="tsp" sumData="{{item}}">
         </swipesummary>
     </view>
 </scroll-view>

@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        searchKey: "tag1",
+        searchKey: "",
     },
 
     /**
@@ -72,7 +72,7 @@ Page({
         console.log("this is in search 2")
         console.log(option)
         this.setData({
-            searchKey:option.detail.searchKey2
+            searchKey:option.detail.key
         })
         var current = this.selectComponent(' .homelist')
         current.data.currentPage = -1;

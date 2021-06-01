@@ -5,37 +5,33 @@
 <!-- 一个homeList中将会填充多个summary -->
 
 <view class="Block">
-<van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}" async-close
-  bind:close="onClose">
-    <van-cell-group  bindtap="clickSwipesummary">
-
-        <view class="Title">
-            {{sumData.title}}
-        </view>
-        <view class="SumCont">
-            {{sumData.content}}
-        </view>
-
-        <view class="Timeandtag">
-            <view class="Time">
-                {{sumData.updateTime}}
-            </view>
-            <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
-                <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item.tagName}}</view>
-            </scroll-view>
-        </view>
-
-    </van-cell-group>
-    <view slot="left" class="van-swipe-cell_left">
-        <view bindtap="toEdit" class="edit">
+    <van-swipe-cell class="van-swipe-cell" right-width="{{50}}" left-width="{{50}}" async-close bind:close="onClose">
+        <view slot="left" class="van-swipe-cell_left container">
+           <view>
             编辑
+           </view> 
         </view>
-    </view>
-    <view slot="right" class="van-swipe-cell_right">
-        <view bindtap="toDelete" class="delete">
+        <van-cell-group bind:tap="clickSwipesummary" >
+
+            <view class="Title">
+                {{sumData.title}}
+            </view>
+            <view class="SumCont">
+                {{sumData.content}}
+            </view>
+
+            <view class="Timeandtag">
+                <view class="Time">
+                    {{sumData.updateTime}}
+                </view>
+                <scroll-view class="tagss" scroll-x="true" style="white-space:nowrap">
+                    <view wx:for="{{sumData.tags}}" wx:key="this" class="chip">{{item.tagName}}</view>
+                </scroll-view>
+            </view>
+        </van-cell-group>
+        <view slot="right" class="van-swipe-cell_right container">
             删除
         </view>
-    </view>
 
-</van-swipe-cell>
+    </van-swipe-cell>
 </view>

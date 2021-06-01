@@ -1,26 +1,13 @@
 // components/searchBar/searchBar2.js
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
-    searchKey2: {
+    value: {
       type: String,
-      value: "",
+      value:""
     }
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-    value:"",
   },
-
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
     onChange(e) {
       this.setData({
@@ -29,13 +16,17 @@ Component({
     },
 
     onClick() {
-      this.data.searchKey2 = this.data.value;
-      console.log(this.data.searchKey2)
-      console.log("in searchBar2")
-      this.setData({
-        value: '',
-      })
-      this.triggerEvent('search2',{searchKey2:this.data.searchKey2})
+      if(this.data.value==="")
+      {
+        wx.showToast({
+          title: '请输入内容',
+          icon:"none",
+          duration:500
+        })
+      }else{
+        this.triggerEvent('search2',{key:this.data.value})
+      }
+  
     },
   }
 })

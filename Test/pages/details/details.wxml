@@ -2,12 +2,12 @@
 <!-- 详情界面 第一个展示类型为problem的workDetails 后续展示类型为answer的workDetails -->
 <!-- 这个页面显示不出底部是正常的，之后用到该界面时无需底部 -->
 <scroll-view>
-    <view id="problem">
-        <workDetails workData="{{myProblem}}" workId="{{problemId}}" workType="problem">
+    <view id="problem" class="problem">
+        <workDetails class="workdetail" workData="{{myProblem}}" workType="problem">
         </workDetails>
     </view>
-    <view class="answers" wx:for="{{myAnswerList}}" wx:key="id">
-        <workDetails workData="{{item}}" workType="answers">
+    <view wx:for="{{dataArray}}" wx:key="id" wx:for-index="idx" wx:for-item="item1">
+        <workDetails  class="answer{{idx}}-{{index}}" wx:key="tsp" wx:for="{{item1}}" workData="{{item}}" workType="answers">
         </workDetails>
     </view>
 </scroll-view>

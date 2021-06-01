@@ -2,107 +2,98 @@ import {
     myService
 } from "../../utils/util"
 
-
+const pageSize = getApp().globalData.pageSize
 Component({
 
     externalClasses: ['scrollclass'],
-    /**
-     * 组件的属性列表
-     */
     properties: {
-       searchKey:
-       {
-           type:String,
-           value:"",
-       }
+        searchKey: {
+            type: String
+        }
     },
-
-    /**
-     * 组件的初始数据
-     */
     data: {
-        //TO-DO 从服务器获得summary列表并展示 此处仅供参考
-        mykey:"",
         currentPage: -1,
         dataArray: [],
         state: false,
+        atLast: false,
+        last: -1
     },
 
-    // },
-
-    /**
-     * 组件的方法列表
-     */
-
     methods: {
-
         onBottom(e) {
-            console.log("------------0")
-            this.data.currentPage += 1;
-            myService({
-                url: "problem/keyword/" + this.data.searchKey + "?pageNum=" + (this.data.currentPage + 2),
-                success: (res) => {
-                    var redata = res.data.data
-                    this.data.dataArray.push(redata)
-                    this.setData({
-                        dataArray: this.data.dataArray,
-                        state: false
-                    });
-                    wx.showLoading({
-                        title: '加载中',
-                    })
-                    setTimeout(function () {
+            if (!this.data.atLast) {
+                myService({
+                    url: "problem/keyword/" + this.data.searchKey + "?last=" + this.data.last,
+                    success: (res) => {
                         wx.hideLoading()
-                    }, 500);
-
-                },
-                fail: (err) => {
-                    wx.showToast({
-                        title: '加载失败',
-                        icon: 'error',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
-                },
-                method: "GET",
-            })
+                        console.log(res)
+                        var redata = res.data.data
+                        this.data.currentPage += 1;
+                        this.data.last = redata[redata.length - 1].score
+                        if (res.data.data.length === pageSize) {
+                            this.data.atLast = false
+                        } else {
+                            this.data.atLast = true
+                        }
+                        this.setData({
+                            ["dataArray[" + (this.data.currentPage) + "]"]: redata,
+                        });
+                    },
+                    fail: (err) => {
+                        wx.showToast({
+                            title: '加载失败',
+                            icon: 'error',
+                            duration: 500
+                        })
+                    },
+                    method: "GET",
+                })
+            } else {
+                wx.showToast({
+                    title: '已经到底了',
+                    icon: "none",
+                    duration: 500
+                })
+            }
         },
-
         onRefresh(e) {
-            console.log(this)
-            console.log(this.data.currentPage)
-            console.log("123123---")
             myService({
-                url: "problem/keyword/" + this.data.searchKey + "?pageNum=" + (this.data.currentPage + 2),
+                url: "problem/keyword/" + this.data.searchKey + "?last=-1",
                 success: (res) => {
-                    this.data.currentPage += 1;
+                    wx.hideLoading()
+                    console.log(res)
+                    this.data.currentPage = 0
                     var redata = res.data.data
+                    this.data.last = redata[redata.length - 1].score
+                    if (res.data.data.length === pageSize) {
+                        this.data.atLast = false
+                    } else {
+                        this.data.atLast = true
+                    }
                     this.data.dataArray = []
                     this.data.dataArray.push(redata)
                     this.setData({
                         dataArray: this.data.dataArray,
-                        state: false
                     });
-                    wx.showLoading({
-                        title: '刷新中',
-                    })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
                 },
                 fail: (err) => {
                     wx.showToast({
                         title: '刷新失败',
                         icon: 'error',
+                        duration: 500
                     })
-                    setTimeout(function () {
-                        wx.hideLoading()
-                    }, 500);
+                },
+                complete: () => {
+                    this.setData({
+                        state: false
+                    });
                 },
                 method: "GET",
             })
         },
 
     },
+    lifetimes: {
+
+    }
 })

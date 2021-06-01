@@ -2,15 +2,22 @@
 :host {
   display: block;
 }
-
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .Block {
   background: white;
   box-shadow: 0rpx 0rpx 1rpx 1rpx #c9c9c9;
-  padding-bottom: 12rpx;
-  padding-top: 10rpx;
+ 
+ 
 }
 
 .Title {
+  padding-top: 10rpx;
   color:black;
   text-overflow: ellipsis;
   font-size: 35rpx;
@@ -26,14 +33,14 @@
   flex-direction: row;
   width: 95%;
   margin-top: 10rpx;
-
+  padding-bottom: 12rpx;
 }
 
 .Time {
   font-size: 25rpx;
   color: black;
   margin-left: 10rpx;
-  width: 32%;
+  width: 40%;
 }
 
 .tagss {
@@ -41,17 +48,18 @@
   height: 30rpx;
   margin-left: 20rpx;
   margin-right: 5rpx;
+  margin-bottom: 5rpx;
 }
 
 .chip {
-  background-color: rgb(188, 230, 247);
+  background-color: rgb(0, 190, 57);
   display: inline-block;
   border-radius: 30rpx;
   font-size: 20rpx;
   font-weight: 500;
   height: 30rpx;
   padding: 3rpx 10rpx;
-  color: rgb(0, 0, 0);
+  color: rgb(247, 243, 243);
   margin-left: 20rpx;
   vertical-align: 30rpx;
 }
@@ -73,32 +81,20 @@
 }
 
 .van-swipe-cell_left {
+  width: 50px;
   height: 100%;
-  font-size: 30rpx;
+  font-size: 40rpx;
   color: #fff;
   background-color: rgb(24, 187, 9);
-  word-wrap: break-word;
-  padding: 0 22rpx;
-  box-sizing: border-box;
-  /*文本垂直居中*/
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+
+
 }
 
 .van-swipe-cell_right {
+  width:50px;
   height: 100%;
-  font-size: 30rpx;
+  font-size: 40rpx;
   color: #fff;
   background-color: #f44;
-  word-wrap: break-word;
-  padding: 0 22rpx;
-  box-sizing: border-box;
-  /*文本垂直居中*/
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  display: flex;
 }
 

@@ -2,6 +2,7 @@ import {
   myService
 } from "../../utils/util"
 Page({
+
   data: {
     pageTitle: "",
     formats: {},
@@ -13,43 +14,181 @@ Page({
     keyboardHeight: 0,
     isIOS: false,
     textInput: "",
-    problemId: 0,
-    //tempType: "",
-
     thisProblemId: 0,
     thisAnswerId: 0,
     thisWorkType: "",
-    //用于修改时，获得原本的信息
-    sumData: [{
-
-    }],
-
-    tabData: [{
-        tagName: "Q",
-        tagId: "1234",
-      },
-      {
-        tagName: "B",
-        tagId: "145",
-      }
-    ],
-
+    tabData: [],
     show: false,
-
     isAnonymous: 0,
     anon: false, //用于将bool类型变量转换为枚举类型
-
     result: ['1', '2'],
+    tempresult: ['1', '2'],
+    tempIsAnonymous: 0,
+    tempanon: false,
+    option: {},
+    url: '',
+    method: "",
+    changed: false
   },
+    uploadData() {
+      switch (this.data.thisWorkType) {
+        case "newProblem":
+          return {
+            title: this.data.problemTitle,
+            isAnonymous: this.data.isAnonymous,
+            tagIds: this.data.result,
+          }
+          break;
+        case "newAnswer":
+          return {
+            problemId: this.data.thisProblemId,
+            isAnonymous: this.data.isAnonymous,
+          }
+          break;
+        case "editProblem":
+          return {
+            title: this.data.problemTitle,
+            isAnonymous: this.data.isAnonymous,
+            tagIds: this.data.result,
+          }
+          break;
+        case "editAnswer":
+          return {
+            isAnonymous: this.data.isAnonymous,
+          }
+          break;
+      }
 
+    },
+  upload() {
+    var patt = /<img\ssrc="http:\/\/tmp\/.*?"/g
+    var patt1 = /"(http:\/\/tmp\/.*?)"/
+    this.editorCtx.getContents({
+      success: (conres) => {
+        var det = conres.html;
+        var imgs = det.match(patt)
+        console.log(imgs)
+        if (imgs === null) {
+          console.log("no images inserted ")
+          var uploadData = this.uploadData()
+          uploadData.content=conres.text
+          uploadData.detail = det;
+          console.log("no", uploadData)
+          myService({
+            url: this.data.url,
+            data: uploadData,
+            method: this.data.method,
+            success: function (res) {
+              wx.hideLoading()
+              wx.navigateBack({
+                delta:2
+              })
+              wx.showToast({
+                title: '发布成功！',
+                duration: 500,
+              })
+            },
+            fail: function (err) {
+              wx.showToast({
+                title: '发布失败！',
+                icon: "error",
+                duration: 500,
+              })
+            }
+          })
+          return
+        } else {
+          var sended = 0;
+          var imgpaths = []
+          for (let i in imgs) {
+            console.log(imgs[i].match(patt1))
+            wx.uploadFile({
+              filePath: imgs[i].match(patt1)[1],
+              name: 'image',
+              url: 'https://www.hualigs.cn/api/upload',
+              formData: {
+                apiType: "bilibili",
+                token: "36028cba8df48971e3a8618d038291f2",
+                floder: 1091
+              },
+              success: (res) => {
+                //console.log(res)
+                var resdata = JSON.parse(res.data)
+                sended += 1
+                imgpaths[i] = resdata.data.url.bilibili;
+                if (sended === imgs.length) {
+                  var idx = 0;
+                  var detail = det.replace(patt, () => {
+                    return '<img src=' + '"' + imgpaths[idx++] + '"';
+                  })
+                  //console.log(imgpaths)
+                  console.log("image[i] uploaded, detail: ", detail)
+                  //接下来已经拿到了detail
+                  //直接执行myService，把detail放进myService的data里
+                  //就在此处执行
+                  var uploadData = this.uploadData()
+                  uploadData.content=conres.text
+                  uploadData.detail = detail;
+                  console.log("ha", uploadData)
+                  myService({
+                    url: this.data.url,
+                    data: uploadData,
+                    method: this.data.method,
+                    success: function (res) {
+                      wx.navigateBack({
+                        delta:2
+                      })
+                      wx.showToast({
+                        title: '发布成功！',
+                        duration: 500,
+                      })
+                    },
+                    fail: function (err) {
+                      wx.showToast({
+                        title: '发布失败',
+                        icon: "error",
+                        duration: 500
+                      })
+                    }
+                  })
+                }
+              },
+              fail: (err) => {
+                console.log(err)
+                wx.showToast({
+                  title: '发布失败',
+                  icon: "error",
+                  duration: 500
+                })
+              }
+            })
+          }
+        }
+      },
+      fail: (err) => {
+        console.log(err)
+        wx.showToast({
+          title: '发布失败',
+          icon: error,
+          duration: 500
+        })
+      }
+
+    })
+
+  },
   onClickLeft() {
     wx.navigateBack();
   },
 
   onClickRight(e) {
-    if (this.data.thisWorkType=="newProblem") { // newProblem
+    wx.showLoading({
+      title: '发布中',
+      mask: true
+    })
+    if (this.data.thisWorkType === "newProblem") { // newProblem
       console.log("尝试发布一个新问题")
-      if (this.data.problemTitle == "") {
+      if (this.data.problemTitle === "") {
         wx.showToast({
           title: '问题标题不能为空！',
           icon: 'none',
@@ -67,116 +206,8 @@ Page({
         console.log('新问题发布失败：问题描述为空')
         return
       }
-
-      var sended = 0;
-      const that = this
-      var noImage = false;
-      this.editorCtx.getContents({
-        success: (res) => {
-          var det = res.html;
-          var patt = /<img\ssrc=".*?"/g
-          var patt1 = /"(.*?)"/
-          var imgs = det.match(patt)
-          console.log(imgs)
-          if (imgs === null) {
-            console.log("no images inserted ")
-            myService({
-              url: "problem",
-              data: {
-                title: that.data.problemTitle,
-                content: that.data.textInput,
-                isAnonymous: that.data.isAnonymous,
-                tagIds: that.data.result,
-                detail: det
-              },
-              method: "POST",
-              success: function (res) {
-                console.log("不带有图片的新问题发布成功")
-                //console.log("不带有图片的新问题发布成功\nproblemTitle: ", that.data.problemTitle)
-                //console.log("problemDescription: ", that.data.textInput)
-                //console.log(det)
-                wx.navigateBack()
-                wx.showToast({
-                  title: '发布成功！',
-                  duration: 1500,
-                })
-              },
-              fail: function (err) {
-                console.log("新问题发布失败")
-                console.log(err)
-              }
-            })
-            return
-          } else {
-            var imgpaths = []
-            for (let i in imgs) {
-              console.log(imgs[i].match(patt1))
-              wx.uploadFile({
-                filePath: imgs[i].match(patt1)[1],
-                name: 'image',
-                url: 'https://www.hualigs.cn/api/upload',
-                formData: {
-                  apiType: "bilibili",
-                  token: "36028cba8df48971e3a8618d038291f2",
-                  floder: 1091
-                },
-                success: (res) => {
-                  //console.log(res)
-                  var resdata = JSON.parse(res.data)
-                  sended += 1
-                  imgpaths[i] = resdata.data.url.bilibili;
-                  if (sended === imgs.length) {
-                    var idx = 0;
-                    var detail = det.replace(patt, () => {
-                      return '<img src=' + '"' + imgpaths[idx++] + '"';
-                    })
-                    //console.log(imgpaths)
-                    console.log("image[i] uploaded, detail: ", detail)
-                    //接下来已经拿到了detail
-                    //直接执行myService，把detail放进myService的data里
-                    //就在此处执行
-                    myService({
-                      url: "problem",
-                      data: {
-                        title: that.data.problemTitle,
-                        content: that.data.textInput,
-                        isAnonymous: that.data.isAnonymous,
-                        tagIds: that.data.result,
-                        detail: detail
-                      },
-                      method: "POST",
-                      success: function (res) {
-                        console.log("带有图片的新问题发布成功")
-                        // console.log("带有图片的新问题发布成功\nproblemTitle: ", that.data.problemTitle)
-                        // console.log("problemDescription: ", that.data.textInput)
-                        // console.log(detail)
-                        wx.navigateBack()
-                        wx.showToast({
-                          title: '发布成功！',
-                          duration: 1500,
-                        })
-                      },
-                      fail: function (err) {
-                        console.log("新问题发布失败")
-                        console.log(err)
-                      }
-                    })
-                  }
-                },
-                fail: (err) => {
-                  console.log(err)
-                }
-              })
-            }
-          }
-        },
-        fail: (err) => {
-          console.log(err)
-        }
-
-      })
-
-    } else if(this.data.thisWorkType=="newAnswer") {
+      this.upload()
+    } else if (this.data.thisWorkType == "newAnswer") {
       console.log("尝试发布一个新回答", this.data.textInput)
       if (this.data.textInput === "") {
         wx.showToast({
@@ -186,116 +217,10 @@ Page({
         })
         return
       }
-      var sended = 0;
-      const that = this
-      var noImage = false;
-      this.editorCtx.getContents({
-        success: (res) => {
-          var det = res.html;
-          var patt = /<img\ssrc=".*?"/g
-          var patt1 = /"(.*?)"/
-          var imgs = det.match(patt)
-          console.log(imgs)
-          if (imgs === null) {
-            console.log("no images inserted ")
-            myService({
-              url: "answer",
-              data: {
-                content: that.data.textInput,
-                isAnonymous: that.data.isAnonymous,
-                problemId: 1,
-                detail: det
-              },
-              method: "POST",
-              success: function (res) {
-                console.log("不带有图片的新回答发布成功")
-                //console.log("不带有图片的新问题发布成功\nproblemTitle: ", that.data.problemTitle)
-                //console.log("problemDescription: ", that.data.textInput)
-                //console.log(det)
-                wx.navigateBack()
-                wx.showToast({
-                  title: '发布成功！',
-                  duration: 1500,
-                })
-              },
-              fail: function (err) {
-                console.log("新回答发布失败")
-                console.log(err)
-              }
-            })
-            return
-          } else {
-            var imgpaths = []
-            for (let i in imgs) {
-              console.log(imgs[i].match(patt1))
-              wx.uploadFile({
-                filePath: imgs[i].match(patt1)[1],
-                name: 'image',
-                url: 'https://www.hualigs.cn/api/upload',
-                formData: {
-                  apiType: "bilibili",
-                  token: "36028cba8df48971e3a8618d038291f2",
-                  floder: 1091
-                },
-                success: (res) => {
-                  //console.log(res)
-                  var resdata = JSON.parse(res.data)
-                  sended += 1
-                  imgpaths[i] = resdata.data.url.bilibili;
-                  if (sended === imgs.length) {
-                    var idx = 0;
-                    var detail = det.replace(patt, () => {
-                      return '<img src=' + '"' + imgpaths[idx++] + '"';
-                    })
-                    //console.log(imgpaths)
-                    console.log("image[i] uploaded, detail: ", detail)
-                    //接下来已经拿到了detail
-                    //直接执行myService，把detail放进myService的data里
-                    //就在此处执行
-                    myService({
-                      url: "problem",
-                      data: {
-
-                        content: that.data.textInput,
-                        isAnonymous: that.data.isAnonymous,
-                        problemId: that.data.problemId,
-                        detail: detail
-                      },
-                      method: "POST",
-                      success: function (res) {
-                        console.log(detail)
-                        console.log("带有图片的新问题发布成功")
-                        // console.log("带有图片的新问题发布成功\nproblemTitle: ", that.data.problemTitle)
-                        // console.log("problemDescription: ", that.data.textInput)
-                        // console.log(detail)
-                        wx.navigateBack()
-                        wx.showToast({
-                          title: '发布成功！',
-                          duration: 1500,
-                        })
-                      },
-                      fail: function (err) {
-                        console.log("新问题发布失败")
-                        console.log(err)
-                      }
-                    })
-                  }
-                },
-                fail: (err) => {
-                  console.log(err)
-                }
-              })
-            }
-          }
-        },
-        fail: (err) => {
-          console.log(err)
-        }
-      })
+      this.upload()
     }
     //编辑问题后的提交
-    else if(this.data.thisWorkType=="editProblem")
-    {
+    else if (this.data.thisWorkType == "editProblem") {
       console.log("尝试修改一个问题")
       if (this.data.problemTitle == "") {
         wx.showToast({
@@ -306,7 +231,7 @@ Page({
         console.log('问题修改失败，问题标题为空')
         return
       }
-      if (this.data.textInput === "" || this.data.textInput == "\n") {
+      if (!this.data.changed) {
         wx.showToast({
           title: '问题没有修改！',
           icon: 'none',
@@ -315,114 +240,10 @@ Page({
         console.log('问题修改失败：问题描述为空')
         return
       }
-
-      var sended = 0;
-      const that = this
-      var noImage = false;
-      this.editorCtx.getContents({
-        success: (res) => {
-          var det = res.html;
-          var patt = /<img\ssrc=".*?"/g
-          var patt1 = /"(.*?)"/
-          var imgs = det.match(patt)
-          console.log(imgs)
-          if (imgs === null) {
-            console.log("no images inserted ")
-            console.log(this)
-            myService({
-              url: "problem/"+this.data.thisProblemId,
-              data: {
-                title: that.data.problemTitle,
-                content: that.data.textInput,
-                isAnonymous: that.data.isAnonymous,
-                tagIds: that.data.result,
-                detail: det
-              },
-              method: "PUT",
-              success: function (res) {
-                console.log("不带有图片的问题修改成功")
-                wx.navigateBack()
-                wx.showToast({
-                  title: '修改成功！',
-                  duration: 1500,
-                })
-              },
-              fail: function (err) {
-                console.log("问题修改失败")
-                console.log(err)
-              }
-            })
-            return
-          } else {
-            var imgpaths = []
-            for (let i in imgs) {
-              console.log(imgs[i].match(patt1))
-              wx.uploadFile({
-                filePath: imgs[i].match(patt1)[1],
-                name: 'image',
-                url: 'https://www.hualigs.cn/api/upload',
-                formData: {
-                  apiType: "bilibili",
-                  token: "36028cba8df48971e3a8618d038291f2",
-                  floder: 1091
-                },
-                success: (res) => {
-                  //console.log(res)
-                  var resdata = JSON.parse(res.data)
-                  sended += 1
-                  imgpaths[i] = resdata.data.url.bilibili;
-                  if (sended === imgs.length) {
-                    var idx = 0;
-                    var detail = det.replace(patt, () => {
-                      return '<img src=' + '"' + imgpaths[idx++] + '"';
-                    })
-                    //console.log(imgpaths)
-                    console.log("image[i] uploaded, detail: ", detail)
-                    //接下来已经拿到了detail
-                    //直接执行myService，把detail放进myService的data里
-                    //就在此处执行
-                    myService({
-                      url: "problem/"+this.data.thisProblemId,
-                      data: {
-                        title: that.data.problemTitle,
-                        content: that.data.textInput,
-                        isAnonymous: that.data.isAnonymous,
-                        tagIds: that.data.result,
-                        detail: detail
-                      },
-                      method: "PUT",
-                      success: function (res) {
-                        console.log("带有图片的问题修改成功")
-                        wx.navigateBack()
-                        wx.showToast({
-                          title: '修改成功！',
-                          duration: 1500,
-                        })
-                      },
-                      fail: function (err) {
-                        console.log("问题修改失败")
-                        console.log(err)
-                      }
-                    })
-                  }
-                },
-                fail: (err) => {
-                  console.log(err)
-                }
-              })
-            }
-          }
-        },
-        fail: (err) => {
-          console.log(err)
-        }
-
-      })
-    }
-    else if(this.data.thisWorkType=="editAnswer")
-    {
+      this.upload()
+    } else if (this.data.thisWorkType == "editAnswer") {
       console.log("尝试修改一个回答", this.data.textInput)
-      if (this.data.textInput === "") {
+      if (!this.data.changed) {
         wx.showToast({
           title: '回答没有修改！',
           icon: 'none',
@@ -430,311 +251,35 @@ Page({
         })
         return
       }
-      var sended = 0;
-      const that = this
-      var noImage = false;
-      this.editorCtx.getContents({
-        success: (res) => {
-          var det = res.html;
-          var patt = /<img\ssrc=".*?"/g
-          var patt1 = /"(.*?)"/
-          var imgs = det.match(patt)
-          console.log(imgs)
-          if (imgs === null) {
-            console.log("no images inserted ")
-            myService({
-              url: "answer/"+this.data.thisAnswerId,
-              data: {
-                content: that.data.textInput,
-                isAnonymous: that.data.isAnonymous,
-                detail: det
-              },
-              method: "PUT",
-              success: function (res) {
-                console.log("不带有图片的回答修改成功")
-                wx.navigateBack()
-                wx.showToast({
-                  title: '修改成功！',
-                  duration: 1500,
-                })
-              },
-              fail: function (err) {
-                console.log("回答修改失败")
-                console.log(err)
-              }
-            })
-            return
-          } else {
-            var imgpaths = []
-            for (let i in imgs) {
-              console.log(imgs[i].match(patt1))
-              wx.uploadFile({
-                filePath: imgs[i].match(patt1)[1],
-                name: 'image',
-                url: 'https://www.hualigs.cn/api/upload',
-                formData: {
-                  apiType: "bilibili",
-                  token: "36028cba8df48971e3a8618d038291f2",
-                  floder: 1091
-                },
-                success: (res) => {
-                  var resdata = JSON.parse(res.data)
-                  sended += 1
-                  imgpaths[i] = resdata.data.url.bilibili;
-                  if (sended === imgs.length) {
-                    var idx = 0;
-                    var detail = det.replace(patt, () => {
-                      return '<img src=' + '"' + imgpaths[idx++] + '"';
-                    })
-                    //console.log(imgpaths)
-                    console.log("image[i] uploaded, detail: ", detail)
-                    //接下来已经拿到了detail
-                    //直接执行myService，把detail放进myService的data里
-                    //就在此处执行
-                    myService({
-                      url: "answer/"+this.data.thisAnswerId,
-                      data: {
-                        content: that.data.textInput,
-                        isAnonymous: that.data.isAnonymous,
-                        detail: detail
-                      },
-                      method: "PUT",
-                      success: function (res) {
-                        console.log(detail)
-                        console.log("带有图片的回答修改成功")
-                        wx.navigateBack()
-                        wx.showToast({
-                          title: '发布成功！',
-                          duration: 1500,
-                        })
-                      },
-                      fail: function (err) {
-                        console.log("回答修改失败")
-                        console.log(err)
-                      }
-                    })
-                  }
-                },
-                fail: (err) => {
-                  console.log(err)
-                }
-              })
-            }
-          }
-        },
-        fail: (err) => {
-          console.log(err)
-        }
-      })
+      this.upload()
     }
   },
-
   inputTitle(e) {
     this.setData({
       problemTitle: e.detail
     })
     //console.log(this.data.problemTitle)
   },
-
   inputEditor(e) {
     //console.log(e)
     this.setData({
       textInput: e.detail.text
     })
-
+    this.data.changed=true;
   },
-
-  readOnlyChange() {
-    this.setData({
-      readOnly: !this.data.readOnly
-    })
-  },
-
-  setReadOnly() {
-    this.setData({
-      readOnly: true,
-    })
-  },
-
-  setNotReadOnly() {
-    this.setData({
-      readOnly: false,
-    })
-  },
-
-  onShow() {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 1
-      })
-    }
-  },
-
   onLoad(option) {
     console.log(option)
     console.log("options-------")
     // console.log(getCurrentPages()）
     //用于获取所有标签，以供选择
-    myService({
-      url: "tag/all",
-      success: (res) => {
-        // console.log(res.data)
-        this.setData({
-          "tabData": res.data.data,
-          problemId: option.problemId
-        })
-      },
-      fail: (err) => {
-        // console.log(err)
-      },
-      method: "GET",
+    this.setData({
+      option: option
     })
-
-
-    //界面设置
-    if (option.type === "problem") {
-      var temptype = "newProblem"
-      this.data.thisWorkType = "newProblem"
-    } else if (option.type === "answer") {
-      var temptype = "newAnswer"
-      this.data.thisWorkType = "newAnswer"
-    } else if (option.type === "editProblem") {
-      var temptype = "editProblem"
-      this.data.thisProblemId = option.problemId
-      this.data.thisWorkType = "editProblem"
-    } else if (option.type === "editAnswer") {
-      var temptype = "editAnswer"
-      this.data.thisWorkType = "editAnswer"
-      this.data.thisProblemId = option.problemId
-      this.data.thisAnswerId = option.answerId
-    }
-    //temptype = "newAnswer"
-    console.log(temptype)
-    
-    //发布新问题
-    if (temptype == "newProblem") {
-      this.setData({
-        pageTitle: "发布新问题",
-        titleReadOnly: false
-      })
-    }
-    //发布新回答
-    else if (temptype == "newAnswer") {
-      this.setData({
-        pageTitle: "写新回答",
-        titleReadOnly: true,
-        problemTitle: option.title,
-        placeholder: "请输入您的回答"
-      })
-    }
-    //编辑问题
-    else if (temptype == "editProblem") {
-      myService({
-        url: "problem/" + this.data.thisProblemId,
-        success: (res) => {
-          console.log(res)
-          console.log("-------");
-          const that = res
-          this.setData({
-            problemTitle: res.data.data.title,
-            titleReadOnly: false,
-          })
-          wx.createSelectorQuery().select('#editor').context(function (res) {
-            that.editorCtx = res.context
-            console.log(that)
-            that.editorCtx.setContents({
-              html: that.data.data.detail,
-              success: function () {}
-            })
-          }).exec()
-          wx.showLoading({
-            title: '加载中',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        fail: (err) => {
-          wx.showToast({
-            title: '加载失败',
-            icon: 'error',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        method: "GET",
-      })
-    }
-    //编辑回答
-    else if (temptype == "editAnswer") {
-      //获取当前问题的标题
-      myService({
-        url: "problem/" + this.data.thisProblemId,
-        success: (res) => {
-          this.setData({
-            problemTitle: res.data.data.title,
-            titleReadOnly: true,
-          })
-          wx.showLoading({
-            title: '加载中',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        fail: (err) => {
-          wx.showToast({
-            title: '加载失败',
-            icon: 'error',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        method: "GET",
-      }),
-      //获取当前回答的内容
-      myService({
-        url: "answer/" + this.data.thisAnswerId,
-        success: (res) => {
-          console.log(res)
-          console.log("------+-");
-          const that = res
-          const thiss =this
-          wx.createSelectorQuery().select('#editor').context(function (res) {
-              that.editorCtx = res.context
-              that.editorCtx.setContents({
-                  html: that.data.data[thiss.data.thisAnswerId].detail,
-                  success:()=>{}
-              })
-          }).exec()
-          wx.showLoading({
-            title: '加载中',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        fail: (err) => {
-          wx.showToast({
-            title: '加载失败',
-            icon: 'error',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 500);
-        },
-        method: "GET",
-      })
-    }
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({
       isIOS
     })
-    const that = this
     this.updatePosition(0)
     let keyboardHeight = 0
     wx.onKeyboardHeightChange(res => {
@@ -745,15 +290,15 @@ Page({
         wx.pageScrollTo({
           scrollTop: 0,
           success() {
-            that.updatePosition(keyboardHeight)
-            that.editorCtx.scrollIntoView()
+            this.updatePosition(keyboardHeight)
+            this.editorCtx.scrollIntoView()
           }
         })
       }, duration)
 
     })
   },
-  
+
   updatePosition(keyboardHeight) {
     const toolbarHeight = 50
     const {
@@ -777,10 +322,179 @@ Page({
     return statusBarHeight + navigationBarHeight
   },
   onEditorReady() {
-    const that = this
-    wx.createSelectorQuery().select('#editor').context(function (res) {
-      that.editorCtx = res.context
+    wx.createSelectorQuery().select('#editor').context((res) => {
+      this.editorCtx = res.context
+      console.log("ready");
+      myService({
+        url: "tag/all",
+        success: (res) => {
+          wx.hideLoading()
+          // console.log(res.data)
+          this.setData({
+            "tabData": res.data.data,
+          })
+        },
+        fail: (err) => {
+          // console.log(err)
+        },
+        method: "GET",
+      })
+
+      //界面设置
+      if (this.data.option.type === "problem") {
+        this.setData({
+          pageTitle: "发布新问题",
+          titleReadOnly: false,
+          thisWorkType: "newProblem",
+          url: "problem",
+          method: "POST",
+        })
+
+      } else if (this.data.option.type === "answer") {
+        this.setData({
+          url: "answer",
+          pageTitle: "写新回答",
+          titleReadOnly: true,
+          problemTitle: this.data.option.title,
+          placeholder: "请输入您的回答",
+          thisWorkType: "newAnswer",
+          thisProblemId: this.data.option.problemId,
+          method: "POST"
+        })
+     
+      } else if (this.data.option.type === "editProblem") {
+        this.data.thisProblemId = this.data.option.problemId,
+          this.setData({
+            url: "problem/" + this.data.thisProblemId,
+            thisWorkType: "editProblem",
+            method: "PUT",
+            titleReadOnly: false,
+            isAnonymous: parseInt(this.data.option.isAnonymous),
+            tempIsAnonymous: parseInt(this.data.option.isAnonymous),
+            anon: (this.data.option.isAnonymous === '1' ? true : false),
+            tempanon: (this.data.option.isAnonymous === '1' ? true : false)
+          })
+        myService({
+          url: "problem/" + this.data.thisProblemId,
+          success: (res) => {
+            wx.hideLoading()
+            console.log(res)
+            console.log("-------");
+            const that = res
+            var tempresult1 = []
+            for (let i of res.data.data.tags) {
+              tempresult1.push(i.tagId + "")
+            }
+            console.log(tempresult1)
+            this.setData({
+              problemTitle: res.data.data.title,
+              result: tempresult1,
+              tempresult: tempresult1,
+            })
+            this.editorCtx.setContents({
+              html: that.data.data.detail,
+            })
+          },
+          fail: (err) => {
+            wx.showToast({
+              title: '加载失败',
+              icon: 'error',
+              duration: 500
+            })
+          },
+          method: "GET",
+        })
+      } else if (this.data.option.type === "editAnswer") {
+        this.data.thisProblemId = this.data.option.problemId,
+          this.data.thisAnswerId = this.data.option.answerId,
+          this.setData({
+            thisWorkType: "editAnswer",
+            url: "answer/" + this.data.thisAnswerId,
+            method: "PUT",
+            titleReadOnly: true,
+            isAnonymous: parseInt(this.data.option.isAnonymous),
+            tempIsAnonymous: parseInt(this.data.option.isAnonymous),
+            anon: (this.data.option.isAnonymous === '1' ? true : false),
+            tempanon: (this.data.option.isAnonymous === '1' ? true : false)
+          }) 
+        myService({
+            url: "problem/" + this.data.thisProblemId,
+            success: (res) => {
+              wx.hideLoading()
+              this.setData({
+                problemTitle: res.data.data.title,
+              })
+            },
+            fail: (err) => {
+              wx.showToast({
+                title: '加载失败',
+                icon: 'error',
+                duration: 500
+              })
+            },
+            method: "GET",
+          }),
+          //获取当前回答的内容
+          myService({
+            url: "answer/" + this.data.thisAnswerId,
+            success: (res) => {
+              wx.hideLoading()
+              console.log(res)
+              console.log("------+-");
+              this.editorCtx.setContents({
+                html: res.data.data.detail,
+                success: () => {}
+              })
+            },
+            fail: (err) => {
+              wx.showToast({
+                title: '加载失败',
+                icon: 'error',
+                duration: 500
+              })
+            },
+            method: "GET",
+          })
+      }
     }).exec()
+  },
+  onTitleChange() {
+    this.data.changed = true;
+  },
+  showDialog(e) {
+    this.setData({
+      show: true,
+    })
+  },
+  onConfirm() {
+    this.setData({
+      isAnonymous: this.data.tempIsAnonymous,
+      result: this.data.tempresult,
+      anon: this.data.tempanon
+    })
+    this.data.changed = true;
+  },
+  onCancel() {
+    this.setData({
+      tempIsAnonymous: this.data.isAnonymous,
+      tempresult: this.data.result,
+      tempanon: this.data.anon,
+    })
+  },
+  onChange(event) {
+    this.setData({
+      tempresult: event.detail,
+    });
+  },
+
+  // 此函数用于修改是否匿名的状态
+  onChange2(event) {
+    // console.log(event.detail)
+    this.setData({
+      tempanon: event.detail,
+    });
+    this.data.tempIsAnonymous = (this.data.tempanon === true ? 1 : 0);
+    console.log(this.data.tempIsAnonymous);
   },
   blur() {
     this.editorCtx.blur()
@@ -844,34 +558,4 @@ Page({
       }
     })
   },
-
-  onClose() {
-    this.setData({
-      show: false
-    });
-  },
-
-  showDialog(e) {
-    this.setData({
-      show: true,
-    })
-  },
-
-  onChange(event) {
-    this.setData({
-      result: event.detail,
-    });
-  },
-
-  // 此函数用于修改是否匿名的状态
-  onChange2(event) {
-    // console.log(event.detail)
-    this.setData({
-      anon: event.detail,
-    });
-    this.data.isAnonymous = (this.data.anon === true ? 1 : 0);
-    console.log(this.data.isAnonymous);
-  },
-
-
 })
